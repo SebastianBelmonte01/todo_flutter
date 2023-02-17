@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 
-class MyScaffold extends StatelessWidget {
-  const MyScaffold({super.key});
+class ToDoOption extends StatelessWidget {
+  const ToDoOption({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +28,58 @@ class MyScaffold extends StatelessWidget {
     ),
   );
 }
+
 }
-class MyTodo extends StatelessWidget {
+
+class MyTodo extends StatefulWidget {
   const MyTodo({super.key});
+
+  @override
+  State<MyTodo> createState() => _MyTodoState();
+}
+
+class _MyTodoState extends State<MyTodo> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    ToDoOption(),
+    Text(
+      'Index 1: Business',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("ToDo List", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
-      body: MyScaffold(),
+      body: _widgetOptions.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.timelapse_rounded),
+            label: 'ToDo',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.check),
+            label: 'Done',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: _selectedIndex==0?Colors.red[800]:Colors.green[800],
+        onTap: _onItemTapped,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {},
+        child: const Icon(Icons.add),
+      ),
       
     );
   }
