@@ -16,20 +16,46 @@ class ToDoOption extends StatelessWidget {
         );
   }
   ListTile _tile(String title, String subtitle, IconData icon) {
-  return ListTile(
-    title: Text(title,
-        style: const TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 20,
-        )),
-    subtitle: Text(subtitle),
-    leading: Icon(
-      icon,
-      color: Colors.blue[500],
-    ),
-  );
+    return ListTile(
+      title: Text(title,
+          style: const TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 20,
+          )),
+      subtitle: Text(subtitle),
+      leading: Icon(
+        icon,
+        color: Colors.blue[500],
+      ),
+    );
+  }
 }
 
+class DoneOption extends StatelessWidget {
+  const DoneOption({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return
+        ListView(
+          children: [
+           _tile('CineArts at the Empire', '85 W Portal Ave', Icons.theaters),
+          ],
+        );
+  }
+  ListTile _tile(String title, String subtitle, IconData icon) {
+    return ListTile(
+      title: Text(title,
+          style: const TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 20,
+          )),
+      subtitle: Text(subtitle),
+      leading: Icon(
+        icon,
+        color: Colors.blue[500],
+      ),
+    );
+  }
 }
 
 class MyTodo extends StatefulWidget {
@@ -44,7 +70,8 @@ class _MyTodoState extends State<MyTodo> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     ToDoOption(),
-    MyRegistrationTask(restorationId: "main"),
+    DoneOption()
+    //MyRegistrationTask(restorationId: "main"),
   ];
 
   void _onItemTapped(int index) {
@@ -74,7 +101,9 @@ class _MyTodoState extends State<MyTodo> {
         onTap: _onItemTapped,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () => {
+            Navigator.pushNamed(context, '/register-new-tasks')
+        },
         child: const Icon(Icons.add),
       ),
       

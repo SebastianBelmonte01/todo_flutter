@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_flutter/login.dart';
+import 'package:todo_flutter/register-new-task.dart';
 import 'package:todo_flutter/todo.dart';
 
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const MyLogin(),
         '/todo':(context) => const MyTodo(),
+        '/register-new-tasks':(context) =>  const MyRegistrationTask()
       },
     );
   }

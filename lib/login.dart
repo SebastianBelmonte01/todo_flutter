@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_flutter/register-new-task.dart';
 
 class MyCredentials extends StatefulWidget {
   const MyCredentials({super.key});
@@ -27,7 +28,6 @@ class _MyCredentialsState extends State<MyCredentials> {
   Widget build(BuildContext context) {
     return  Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      
       children: [
         const Image(image: AssetImage('assets/user-calendar.png'), ),
         SizedBox(

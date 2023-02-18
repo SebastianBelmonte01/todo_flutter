@@ -75,74 +75,76 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-      padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextField(
-            controller: taskNameController,
-            decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Nombre de la Tarea',
-                ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            children: [
-              SizedBox(
-                width: 300,
-                child: Text(
-                  _dueDate==""? "Sleccione la fecha de Entrega: " : "Fecha de Entrega:  $_dueDate" ,
-                  style: const TextStyle(fontFamily: "Roboto", fontSize: 15, fontWeight: FontWeight.w800),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: (){_restorableDatePickerRouteFuture.present(); print(_selectedDate.value.day);}, 
-                child: const Icon(Icons.calendar_month)
-              ),
-            ],
-          ),
-          const Text("Seleccione una Etiqueta:   ",
-              style: TextStyle(fontFamily: "Roboto", fontSize: 15, fontWeight: FontWeight.w800),),
-          Row(
-            children: [
-              DropdownButton(
-                value: dropdownValue, 
-                onChanged: (String? value) {
-                  setState(() {
-                    dropdownValue = value!;
-                  });
-                },
-                items: list.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),   
-              ),
-              const SizedBox(
-                width: 30,
-              ),
-              ElevatedButton(
-                onPressed: (){_restorableDatePickerRouteFuture.present(); print(_selectedDate.value.day);}, 
-                child: const Icon(Icons.edit)
-              ),
-            ],
-          ),
-          Center(
-            child: Column(
+    return Scaffold(
+      appBar: AppBar(title: const Text("Login", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextField(
+              controller: taskNameController,
+              decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Nombre de la Tarea',
+                  ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
               children: [
-                ElevatedButton(onPressed: (){}, child: Text("Guardar")),
-                ElevatedButton(onPressed: (){}, child: Text("Cancelar"))
+                SizedBox(
+                  width: 300,
+                  child: Text(
+                    _dueDate==""? "Sleccione la fecha de Entrega: " : "Fecha de Entrega:  $_dueDate" ,
+                    style: const TextStyle(fontFamily: "Roboto", fontSize: 15, fontWeight: FontWeight.w800),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: (){_restorableDatePickerRouteFuture.present(); print(_selectedDate.value.day);}, 
+                  child: const Icon(Icons.calendar_month)
+                ),
               ],
             ),
-          )
-          
-        ],
-      ),
+            const Text("Seleccione una Etiqueta:   ",
+                style: TextStyle(fontFamily: "Roboto", fontSize: 15, fontWeight: FontWeight.w800),),
+            Row(
+              children: [
+                DropdownButton(
+                  value: dropdownValue, 
+                  onChanged: (String? value) {
+                    setState(() {
+                      dropdownValue = value!;
+                    });
+                  },
+                  items: list.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),   
+                ),
+                const SizedBox(
+                  width: 30,
+                ),
+                ElevatedButton(
+                  onPressed: (){_restorableDatePickerRouteFuture.present(); print(_selectedDate.value.day);}, 
+                  child: const Icon(Icons.edit)
+                ),
+              ],
+            ),
+            Center(
+              child: Column(
+                children: [
+                  ElevatedButton(onPressed: (){}, child: Text("Guardar")),
+                  ElevatedButton(onPressed: (){}, child: Text("Cancelar"))
+                ],
+              ),
+            )
+          ],
+        ),
+      )
     );
   }
 
