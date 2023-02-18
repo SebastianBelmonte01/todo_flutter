@@ -1,0 +1,4 @@
+/**
+ * Class Label
+ *  String information
+ */

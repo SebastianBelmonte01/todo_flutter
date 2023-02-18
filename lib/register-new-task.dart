@@ -3,6 +3,9 @@ import 'package:textfield_datepicker/textfield_datepicker.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart'; // for other locales
 
+
+const List<String> list = <String>['jidwqjoidowjiewojew', 'Two', 'Three', 'Four'];
+
 class MyRegistrationTask extends StatefulWidget {  
   const MyRegistrationTask({super.key, this.restorationId});
 
@@ -13,8 +16,9 @@ class MyRegistrationTask extends StatefulWidget {
 }
 
 class _MyRegistrationTaskState extends State<MyRegistrationTask> with RestorationMixin {
-   String _dueDate = "";
-    @override
+  String dropdownValue = list.first;
+  String _dueDate = "";
+  @override
   // TODO: implement restorationId
   String? get restorationId => widget.restorationId;
   
@@ -72,7 +76,7 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
   @override
   Widget build(BuildContext context) {
     return  Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -83,16 +87,16 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                   labelText: 'Nombre de la Tarea',
                 ),
           ),
-          // const SizedBox(
-          //   height: 20,
-          // ),
+          const SizedBox(
+            height: 20,
+          ),
           Row(
-            mainAxisSize: ,
             children: [
               SizedBox(
-                width: 200,
+                width: 300,
                 child: Text(
-                  _dueDate==""? "Sleccione la fecha de Entrega" : _dueDate
+                  _dueDate==""? "Sleccione la fecha de Entrega: " : "Fecha de Entrega:  $_dueDate" ,
+                  style: const TextStyle(fontFamily: "Roboto", fontSize: 15, fontWeight: FontWeight.w800),
                 ),
               ),
               ElevatedButton(
@@ -101,6 +105,42 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
               ),
             ],
           ),
+          const Text("Seleccione una Etiqueta:   ",
+              style: TextStyle(fontFamily: "Roboto", fontSize: 15, fontWeight: FontWeight.w800),),
+          Row(
+            children: [
+              DropdownButton(
+                value: dropdownValue, 
+                onChanged: (String? value) {
+                  setState(() {
+                    dropdownValue = value!;
+                  });
+                },
+                items: list.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),   
+              ),
+              const SizedBox(
+                width: 30,
+              ),
+              ElevatedButton(
+                onPressed: (){_restorableDatePickerRouteFuture.present(); print(_selectedDate.value.day);}, 
+                child: const Icon(Icons.edit)
+              ),
+            ],
+          ),
+          Center(
+            child: Column(
+              children: [
+                ElevatedButton(onPressed: (){}, child: Text("Guardar")),
+                ElevatedButton(onPressed: (){}, child: Text("Cancelar"))
+              ],
+            ),
+          )
+          
         ],
       ),
     );
