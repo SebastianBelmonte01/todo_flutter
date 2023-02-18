@@ -61,8 +61,6 @@ class _MyCredentialsState extends State<MyCredentials> {
           },
           child: Text("Enviar")
         ),
-        
-
       ],
     );
   }

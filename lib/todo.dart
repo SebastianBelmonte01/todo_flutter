@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_flutter/register-new-task.dart';
 
 
 class ToDoOption extends StatelessWidget {
@@ -33,7 +34,6 @@ class ToDoOption extends StatelessWidget {
 
 class MyTodo extends StatefulWidget {
   const MyTodo({super.key});
-
   @override
   State<MyTodo> createState() => _MyTodoState();
 }
@@ -44,10 +44,7 @@ class _MyTodoState extends State<MyTodo> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     ToDoOption(),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
+    MyRegistrationTask(restorationId: "main"),
   ];
 
   void _onItemTapped(int index) {
