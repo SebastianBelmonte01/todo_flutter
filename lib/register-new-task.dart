@@ -76,7 +76,7 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Login", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
+      appBar: AppBar(title: const Text("Añadir Tarea", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
         child: Column(
@@ -129,7 +129,7 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                   width: 30,
                 ),
                 ElevatedButton(
-                  onPressed: (){_restorableDatePickerRouteFuture.present(); print(_selectedDate.value.day);}, 
+                  onPressed: (){Navigator.pushNamed(context, '/register-new-labels');}, 
                   child: const Icon(Icons.edit)
                 ),
               ],
