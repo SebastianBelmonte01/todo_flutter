@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 class Task {
 
   String title = "";
@@ -27,15 +29,11 @@ class Task {
 
  set setDueDate( dueDate) => this.dueDate = dueDate;
 
-  Task(String title, String label, DateTime initialDate, DateTime dueDate){
+  Task(String title, String label, DateTime dueDate){
     this.title = title;
     this.label = label;
     this.completed = false;
-    this.initialDate = initialDate;
+    this.initialDate = DateTime.now();
     this.dueDate = dueDate;
   }
-
-
-
-  
 }

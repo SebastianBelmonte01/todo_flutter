@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:textfield_datepicker/textfield_datepicker.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart'; // for other locales
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:todo_flutter/classes/Task.dart';
+
+import 'package:todo_flutter/register-new-task.dart'; // for other locales
 
 
-const List<String> list = <String>['jidwqjoidowjiewojew', 'Two', 'Three', 'Four'];
+const List<String> list = <String>['uno', 'Two', 'Three', 'Four'];
 
 class MyRegistrationTask extends StatefulWidget {  
   const MyRegistrationTask({super.key, this.restorationId});
@@ -25,17 +28,17 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
   @override
   void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
     // TODO: implement restoreState
-    registerForRestoration(_selectedDate, 'selected_date');
+    registerForRestoration(selectedDate, 'selected_date');
     registerForRestoration(
      _restorableDatePickerRouteFuture, 'date_picker_route_future');
   }
-  final RestorableDateTime _selectedDate = RestorableDateTime(DateTime.now());
+  final RestorableDateTime selectedDate = RestorableDateTime(DateTime.now());
   late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture = RestorableRouteFuture<DateTime?>(
     onComplete: _selectDate,
     onPresent: (NavigatorState navigator, Object? arguments) {
       return navigator.restorablePush(
         _datePickerRoute,
-        arguments: _selectedDate.value.millisecondsSinceEpoch,
+        arguments: selectedDate.value.millisecondsSinceEpoch,
       );
     }
   );
@@ -59,9 +62,9 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
 
   void _selectDate(DateTime? newSelectedDate){
     if (newSelectedDate != null){
-     _selectedDate.value = newSelectedDate;
+     selectedDate.value = newSelectedDate;
       setState(() {
-        _dueDate = "${_selectedDate.value.day} / ${_selectedDate.value.month} / ${_selectedDate.value.year}" ;
+        _dueDate = "${selectedDate.value.day} / ${selectedDate.value.month} / ${selectedDate.value.year}" ;
       });
     }
   }
@@ -102,7 +105,7 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: (){_restorableDatePickerRouteFuture.present(); print(_selectedDate.value.day);}, 
+                  onPressed: (){_restorableDatePickerRouteFuture.present(); print(selectedDate.value.day);}, 
                   child: const Icon(Icons.calendar_month)
                 ),
               ],
@@ -137,7 +140,10 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
             Center(
               child: Column(
                 children: [
-                  ElevatedButton(onPressed: (){}, child: Text("Guardar")),
+                  ElevatedButton(onPressed: (){
+                    Task newTask = new Task(taskNameController.text, dropdownValue, selectedDate.value);
+                    // Navigator.pushNamed(context, '/todo');
+                  }, child: Text("Guardar")),
                   ElevatedButton(onPressed: (){}, child: Text("Cancelar"))
                 ],
               ),

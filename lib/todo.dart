@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:todo_flutter/register-new-task.dart';
 import 'package:todo_flutter/components/my-list-view.dart';
+import 'package:todo_flutter/classes/Task.dart';
 
 
 class ToDoOption extends StatelessWidget {
-  const ToDoOption({super.key});
+
+  const ToDoOption({super.key, required List<Task> listOfTasks});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class DoneOption extends StatelessWidget {
 }
 
 class MyTodo extends StatefulWidget {
-  const MyTodo({super.key});
+  const MyTodo({super.key, required List<Task> myTasks});
   @override
   State<MyTodo> createState() => _MyTodoState();
 }
@@ -52,10 +54,11 @@ class _MyTodoState extends State<MyTodo> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    ToDoOption(),
+    //ToDoOption(),
     DoneOption()
     //MyRegistrationTask(restorationId: "main"),
   ];
+  
 
   void _onItemTapped(int index) {
     setState(() {
@@ -85,6 +88,7 @@ class _MyTodoState extends State<MyTodo> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
+          //Se debe pasar la lista vacia
             Navigator.pushNamed(context, '/register-new-tasks')
         },
         child: const Icon(Icons.add),
