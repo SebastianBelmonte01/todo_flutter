@@ -19,6 +19,7 @@ class MyRegistrationTask extends StatefulWidget {
 }
 
 class _MyRegistrationTaskState extends State<MyRegistrationTask> with RestorationMixin {
+
   String dropdownValue = list.first;
   String _dueDate = "";
   @override
@@ -78,6 +79,8 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
 
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute.of(context)!.settings.arguments as Map;
+    
     return Scaffold(
       appBar: AppBar(title: const Text("Añadir Tarea", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
       body: Padding(

@@ -17,12 +17,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Task> tasksList = [];
     return MaterialApp(
       initialRoute: '/',
       routes: {
         '/': (context) => const MyLogin(),
-        '/todo':(context) =>  MyTodo(myTasks: tasksList,),
+        '/todo':(context) =>  MyTodo(),
         '/register-new-tasks':(context) =>  const MyRegistrationTask(),
         '/register-new-labels':(context) => const MyNewLabel()
       },
