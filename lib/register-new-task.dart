@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:textfield_datepicker/textfield_datepicker.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:todo_flutter/classes/Task.dart';
+import 'package:todo_flutter/providers/task-provider.dart';
 
 import 'package:todo_flutter/register-new-task.dart';
 import 'package:todo_flutter/todo.dart'; // for other locales
@@ -11,8 +13,7 @@ import 'package:todo_flutter/todo.dart'; // for other locales
 const List<String> list = <String>['uno', 'Two', 'Three', 'Four'];
 
 class MyRegistrationTask extends StatefulWidget {  
-  List<Task> myList;
-  MyRegistrationTask({super.key, this.restorationId, required this.myList});
+  const MyRegistrationTask({super.key, this.restorationId});
 
   final String? restorationId;
 
@@ -146,11 +147,11 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                 children: [
                   ElevatedButton(onPressed: (){
                     Task newTask = Task(taskNameController.text, dropdownValue, selectedDate.value);
-                    widget.myList.add(newTask);
-                    print("Mi tamaño ahora es de: ${widget.myList.length}");
+                    context.read<TodoList>().addTask(newTask);
+                    print("Mi tamaño ahora es de: ${context.read<TodoList>().size}");
                     Navigator.pushAndRemoveUntil<void>(
                       context,
-                      MaterialPageRoute<void>(builder: (BuildContext context) => MyTodo(myTasks: widget.myList,)),
+                      MaterialPageRoute<void>(builder: (BuildContext context) => MyTodo()),
                       ModalRoute.withName('/'),
                       
       

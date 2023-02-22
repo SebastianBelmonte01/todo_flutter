@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_flutter/providers/task-provider.dart';
 import 'package:todo_flutter/register-new-task.dart';
 import 'package:todo_flutter/components/my-list-view.dart';
 import 'package:todo_flutter/classes/Task.dart';
@@ -44,48 +46,19 @@ import 'package:todo_flutter/classes/Task.dart';
 // }  
 
 class MyTodo extends StatefulWidget {
-  List<Task> myTasks;
-  MyTodo({super.key, required this.myTasks});
+  MyTodo({super.key});
   @override
   State<MyTodo> createState() => _MyTodoState();
 }
 
 class _MyTodoState extends State<MyTodo> {
   
-
-  Task task1 =  Task("Titulo 1", "Etiqueta 1", DateTime.now());
-  Task task2 =  Task("Titulo 2", "Etiqueta 2", DateTime.now());
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    widget.myTasks.add(task1);
-    widget.myTasks.add(task2);    
-  }
-  
-
-  // int _selectedIndex = 0;
-  // static const TextStyle optionStyle =
-  //     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  // static const List<Widget> _widgetOptions = <Widget>[
-
-  //   //MyRegistrationTask(restorationId: "main"),
-  // ];
-  
-  
-
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     _selectedIndex = index;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
-    print("HOLA MI TAMAÑO ES: ${widget.myTasks.length}");
+    print("HOLA MI TAMAÑO ES: ${context.read<TodoList>().size}");
     return Scaffold(
       appBar: AppBar(title: const Text("ToDo List", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
-      body: MyListView(myList: widget.myTasks),
+      body: MyListView(myList: context.read<TodoList>().list,),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
           //Se debe pasar la lista vacia
@@ -93,7 +66,7 @@ class _MyTodoState extends State<MyTodo> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => MyRegistrationTask(myList: widget.myTasks,)
+              builder: (context) => MyRegistrationTask()
             )
           )
         },
