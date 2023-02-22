@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const MyLogin(),
-        '/todo':(context) =>  MyTodo(),
-        '/register-new-tasks':(context) =>  const MyRegistrationTask(),
+        '/todo':(context) =>  MyTodo(myTasks: [],),
+        // '/register-new-tasks':(context) =>  const MyRegistrationTask(),
         '/register-new-labels':(context) => const MyNewLabel()
       },
     );

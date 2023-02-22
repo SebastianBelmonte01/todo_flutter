@@ -40,6 +40,24 @@ class _MyNewLabelState extends State<MyNewLabel> {
                 ),
             ]
           ),
+
+          Row(
+              children: <Widget> [
+                Expanded(
+                  child: TextField(
+                    controller: labelController,
+                    decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Etiqueta',
+                        ),
+                  ), 
+                ),
+                ElevatedButton(
+                  onPressed: (){}, 
+                  child: const Icon(Icons.delete)
+                ),
+            ]
+          ),
         ],
       ),
     );

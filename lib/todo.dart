@@ -41,16 +41,17 @@ import 'package:todo_flutter/classes/Task.dart';
 //       ),
 //     );
 //   }
-// }
+// }  
 
 class MyTodo extends StatefulWidget {
-  const MyTodo({super.key});
+  List<Task> myTasks;
+  MyTodo({super.key, required this.myTasks});
   @override
   State<MyTodo> createState() => _MyTodoState();
 }
 
 class _MyTodoState extends State<MyTodo> {
-  List<Task> myTasks = [];
+  
 
   Task task1 =  Task("Titulo 1", "Etiqueta 1", DateTime.now());
   Task task2 =  Task("Titulo 2", "Etiqueta 2", DateTime.now());
@@ -58,11 +59,8 @@ class _MyTodoState extends State<MyTodo> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    myTasks.add(task1);
-    myTasks.add(task2);
-
-    print("HOLA MI TAMAÑO ES: ${myTasks.length}");
-    
+    widget.myTasks.add(task1);
+    widget.myTasks.add(task2);    
   }
   
 
@@ -84,15 +82,20 @@ class _MyTodoState extends State<MyTodo> {
 
   @override
   Widget build(BuildContext context) {
+    print("HOLA MI TAMAÑO ES: ${widget.myTasks.length}");
     return Scaffold(
       appBar: AppBar(title: const Text("ToDo List", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
-      body: MyListView(myList: myTasks),
+      body: MyListView(myList: widget.myTasks),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
           //Se debe pasar la lista vacia
-            Navigator.pushNamed(context, '/register-new-tasks',
-              arguments: {'list' : myTasks}
+           // Navigator.pushNamed(context, '/register-new-tasks')
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MyRegistrationTask(myList: widget.myTasks,)
             )
+          )
         },
         child: const Icon(Icons.add),
       ),

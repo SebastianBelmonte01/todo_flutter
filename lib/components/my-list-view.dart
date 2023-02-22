@@ -30,7 +30,7 @@ class _MyListViewState extends State<MyListView> {
             )),
         subtitle: Text('${DateFormat('dd-MM-yyyy').format(widget.myList[index].dueDate)} \nEtiqueta: ${widget.myList[index].label}'),
         trailing : Icon(
-          widget.myList[index].completed ? Icons.done : Icons.punch_clock_outlined,
+          widget.myList[index].completed ? Icons.done : Icons.close,
           color: widget.myList[index].completed ? Color.fromARGB(255, 22, 174, 14) : Color.fromARGB(255, 193, 16, 16),
         ), 
         isThreeLine: true,

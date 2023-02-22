@@ -4,13 +4,15 @@ import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:todo_flutter/classes/Task.dart';
 
-import 'package:todo_flutter/register-new-task.dart'; // for other locales
+import 'package:todo_flutter/register-new-task.dart';
+import 'package:todo_flutter/todo.dart'; // for other locales
 
 
 const List<String> list = <String>['uno', 'Two', 'Three', 'Four'];
 
 class MyRegistrationTask extends StatefulWidget {  
-  const MyRegistrationTask({super.key, this.restorationId});
+  List<Task> myList;
+  MyRegistrationTask({super.key, this.restorationId, required this.myList});
 
   final String? restorationId;
 
@@ -79,7 +81,6 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
 
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute.of(context)!.settings.arguments as Map;
     
     return Scaffold(
       appBar: AppBar(title: const Text("Añadir Tarea", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
@@ -144,10 +145,28 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
               child: Column(
                 children: [
                   ElevatedButton(onPressed: (){
-                    Task newTask = new Task(taskNameController.text, dropdownValue, selectedDate.value);
+                    Task newTask = Task(taskNameController.text, dropdownValue, selectedDate.value);
+                    widget.myList.add(newTask);
+                    print("Mi tamaño ahora es de: ${widget.myList.length}");
+                    Navigator.pushAndRemoveUntil<void>(
+                      context,
+                      MaterialPageRoute<void>(builder: (BuildContext context) => MyTodo(myTasks: widget.myList,)),
+                      ModalRoute.withName('/'),
+                      
+      
+                    );
+                    // Navigator.push(
+                    // context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => MyTodo(myTasks: widget.myList,)
+                    //   )
+                    // );
+
                     // Navigator.pushNamed(context, '/todo');
                   }, child: Text("Guardar")),
-                  ElevatedButton(onPressed: (){}, child: Text("Cancelar"))
+                  ElevatedButton(onPressed: (){
+                    Navigator.pop(context);
+                  }, child: Text("Cancelar"))
                 ],
               ),
             )
