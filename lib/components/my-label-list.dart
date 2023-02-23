@@ -14,16 +14,12 @@ class MyLabelList extends StatefulWidget {
 class _MyLabelListState extends State<MyLabelList> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: generateMyLabelList(widget.myLabelList),
+    return ListView.builder(
+      itemCount: widget.myLabelList.length,
+      itemBuilder: (context, index) => MyLabel(
+        label: widget.myLabelList[index],
+        index: index,
+      )
     );
   }
-}
-
-List<MyLabel> generateMyLabelList (List<Label> myLabelList) {
-  List<MyLabel> myLabelListWidget = [];
-  for(var label in myLabelList){
-    myLabelListWidget.add(MyLabel(label: label,));
-  }
-  return myLabelListWidget;
 }

@@ -6,7 +6,8 @@ import '../providers/label-provider.dart';
 
 class MyLabel extends StatefulWidget {
   Label label;
-  MyLabel({super.key, required this.label});
+  int index;
+  MyLabel({super.key, required this.label, required this.index});
   @override
   State<MyLabel> createState() => _MyLabelState();
 }
@@ -33,8 +34,11 @@ class _MyLabelState extends State<MyLabel> {
     return Row(
               children: <Widget> [
                 Expanded(
-                  child: TextField(
-                    controller: labelController,
+                  child: TextFormField(
+                    initialValue: widget.label.info,
+                    onChanged: (value){
+                      widget.label.info = value;
+                    },
                     decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Etiqueta',
@@ -43,7 +47,7 @@ class _MyLabelState extends State<MyLabel> {
                 ),
                 ElevatedButton(
                   onPressed: (){
-                      context.read<LabelList>().removeLabel(0);
+                      context.read<LabelList>().removeLabel(widget.index);
                       print("TEXTO ${widget.label.getInfo}");
                       print("ELIMINACION MI NUEVO TAMAÑO DE ETIQUETA ES DE ${context.read<LabelList>().size}");
                   }, 

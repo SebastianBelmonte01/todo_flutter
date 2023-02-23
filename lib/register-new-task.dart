@@ -105,12 +105,15 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                 SizedBox(
                   width: 300,
                   child: Text(
-                    _dueDate==""? "Sleccione la fecha de Entrega: " : "Fecha de Entrega:  $_dueDate" ,
+                    _dueDate==""? "Seleccione la fecha de Entrega: " : "Fecha de Entrega:  $_dueDate" ,
                     style: const TextStyle(fontFamily: "Roboto", fontSize: 15, fontWeight: FontWeight.w800),
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: (){_restorableDatePickerRouteFuture.present(); print(selectedDate.value.day);}, 
+                  onPressed: (){
+                    _restorableDatePickerRouteFuture.present();
+                    print(selectedDate.value.day);
+                  }, 
                   child: const Icon(Icons.calendar_month)
                 ),
               ],
