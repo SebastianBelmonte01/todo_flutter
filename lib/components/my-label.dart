@@ -37,7 +37,10 @@ class _MyLabelState extends State<MyLabel> {
                   child: TextFormField(
                     initialValue: widget.label.info,
                     onChanged: (value){
-                      widget.label.info = value;
+                      //SE DEBE GUARDAR EN UNA VARIABLE EL CAMBIO PERO SE DEBE ACTAULIZAR 
+                      widget.label.isModified = true;
+                      widget.label.newInfo = value;
+
                     },
                     decoration: const InputDecoration(
                           border: OutlineInputBorder(),
@@ -47,9 +50,12 @@ class _MyLabelState extends State<MyLabel> {
                 ),
                 ElevatedButton(
                   onPressed: (){
-                      context.read<LabelList>().removeLabel(widget.index);
-                      print("TEXTO ${widget.label.getInfo}");
-                      print("ELIMINACION MI NUEVO TAMAÑO DE ETIQUETA ES DE ${context.read<LabelList>().size}");
+                    setState(() {
+                      context.read<LabelList>().labelList[widget.index].isRemoved = true;
+                    });
+                    for(int i = 0; i < context.read<LabelList>().labelList.length; i++){
+                      print("Etiqueta ${i+1}: ${context.read<LabelList>().labelList[i].getInfo}");
+                    }
                   }, 
                   child: const Icon(Icons.delete)
                 ),

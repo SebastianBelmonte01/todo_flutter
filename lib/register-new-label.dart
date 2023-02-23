@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_flutter/components/my-label.dart';
 import 'package:todo_flutter/providers/label-provider.dart';
+import 'package:todo_flutter/register-new-task.dart';
 
 import 'classes/Label.dart';
 import 'components/my-label-list.dart';
@@ -59,25 +60,35 @@ class _MyNewLabelState extends State<MyNewLabel> {
             ElevatedButton(
               onPressed: (){
                 setState(() {
-                  //TODO PARA MODIFFICCAR UNA ETIQUETA SE DEBE MODIFICAR DESDE EL WIDHGET HIJO
                   context.read<LabelList>().addLabel(Label("", true));
-                  print("MI NUEVO TAMAÑO DE ETIQUETA ES DE ${auxList.length}");
                 });
               }, 
               child: Text("Añadir")),
             ElevatedButton(
               onPressed: (){
                 setState(() {
-                  // show all the labels in auxList
+                  print("Antes de Modificar: ");
                   for(int i = 0; i < auxList.length; i++){
                     print("Etiqueta ${i+1}: ${auxList[i].info}");
                   }
-                  // guardar
+
+                  context.read<LabelList>().updateLabels(auxList);
+
+                  print("Despues de Modificar: ");
+                  for(int i = 0; i < auxList.length; i++){
+                    print("Etiqueta ${i+1}: ${auxList[i].info}");
+                  }
+
                   context.read<LabelList>().setLabelList(auxList);
                 });
               },
               child: Text("Guardar")),
-            ElevatedButton(onPressed: (){}, child: Text("Cerrar")),
+            ElevatedButton(
+              onPressed: (){
+                context.read<LabelList>().setLabelList(auxList);
+                Navigator.pop(context);
+              },
+              child: Text("Cerrar")),
           ],
         ),
       ),

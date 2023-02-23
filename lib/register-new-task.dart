@@ -1,16 +1,22 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:textfield_datepicker/textfield_datepicker.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:todo_flutter/classes/Task.dart';
+import 'package:todo_flutter/providers/label-provider.dart';
 import 'package:todo_flutter/providers/task-provider.dart';
 
 import 'package:todo_flutter/register-new-task.dart';
-import 'package:todo_flutter/todo.dart'; // for other locales
+import 'package:todo_flutter/todo.dart';
+
+import 'classes/Label.dart'; // for other locales
 
 
-const List<String> list = <String>['uno', 'Two', 'Three', 'Four'];
+
+  // List<String> list = contex.read<LabelList>().getLabelFromList();
+  String dropdownValue = "";
 
 class MyRegistrationTask extends StatefulWidget {  
   const MyRegistrationTask({super.key, this.restorationId});
@@ -23,7 +29,7 @@ class MyRegistrationTask extends StatefulWidget {
 
 class _MyRegistrationTaskState extends State<MyRegistrationTask> with RestorationMixin {
 
-  String dropdownValue = list.first;
+
   String _dueDate = "";
   @override
   // TODO: implement restorationId
@@ -34,7 +40,7 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
     // TODO: implement restoreState
     registerForRestoration(selectedDate, 'selected_date');
     registerForRestoration(
-     _restorableDatePickerRouteFuture, 'date_picker_route_future');
+    _restorableDatePickerRouteFuture, 'date_picker_route_future');
   }
   final RestorableDateTime selectedDate = RestorableDateTime(DateTime.now());
   late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture = RestorableRouteFuture<DateTime?>(
@@ -66,7 +72,7 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
 
   void _selectDate(DateTime? newSelectedDate){
     if (newSelectedDate != null){
-     selectedDate.value = newSelectedDate;
+      selectedDate.value = newSelectedDate;
       setState(() {
         _dueDate = "${selectedDate.value.day} / ${selectedDate.value.month} / ${selectedDate.value.year}" ;
       });
@@ -82,7 +88,10 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
 
   @override
   Widget build(BuildContext context) {
-    
+    List<String> list = context.read<LabelList>().getLabelFromList();
+    if(dropdownValue == ""){
+      dropdownValue = list.first;
+    } 
     return Scaffold(
       appBar: AppBar(title: const Text("Añadir Tarea", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
       body: Padding(
@@ -127,6 +136,7 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                   onChanged: (String? value) {
                     setState(() {
                       dropdownValue = value!;
+                      print("Sleccionado: $value");
                     });
                   },
                   items: list.map<DropdownMenuItem<String>>((String value) {
@@ -140,7 +150,9 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                   width: 30,
                 ),
                 ElevatedButton(
-                  onPressed: (){Navigator.pushNamed(context, '/register-new-labels');}, 
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/register-new-labels');
+                  }, 
                   child: const Icon(Icons.edit)
                 ),
               ],
@@ -148,29 +160,21 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
             Center(
               child: Column(
                 children: [
-                  ElevatedButton(onPressed: (){
-                    Task newTask = Task(taskNameController.text, dropdownValue, selectedDate.value);
-                    context.read<TodoList>().addTask(newTask);
-                    print("Mi tamaño ahora es de: ${context.read<TodoList>().size}");
-                    Navigator.pushAndRemoveUntil<void>(
-                      context,
-                      MaterialPageRoute<void>(builder: (BuildContext context) => MyTodo()),
-                      ModalRoute.withName('/'),
-                      
-      
-                    );
-                    // Navigator.push(
-                    // context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => MyTodo(myTasks: widget.myList,)
-                    //   )
-                    // );
-
-                    // Navigator.pushNamed(context, '/todo');
-                  }, child: Text("Guardar")),
-                  ElevatedButton(onPressed: (){
-                    Navigator.pop(context);
-                  }, child: Text("Cancelar"))
+                  ElevatedButton(
+                    onPressed: (){
+                      print("Valor de DropDOWN $dropdownValue");
+                      Task newTask = Task(taskNameController.text, dropdownValue, selectedDate.value);
+                      context.read<TodoList>().addTask(newTask);
+                      Navigator.pushAndRemoveUntil<void>(
+                        context,
+                        MaterialPageRoute<void>(builder: (BuildContext context) => MyTodo()),
+                        ModalRoute.withName('/'),
+                      );
+                    }, child: Text("Guardar")),
+                  ElevatedButton(
+                    onPressed: (){
+                      Navigator.pop(context);
+                    }, child: Text("Cancelar"))
                 ],
               ),
             )

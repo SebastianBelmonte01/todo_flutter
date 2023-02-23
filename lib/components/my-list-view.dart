@@ -28,7 +28,7 @@ class _MyListViewState extends State<MyListView> {
               fontWeight: FontWeight.w500,
               fontSize: 20,
             )),
-        subtitle: Text('${DateFormat('dd-MM-yyyy').format(widget.myList[index].dueDate)} \nEtiqueta: ${widget.myList[index].label}'),
+        subtitle: Text(widget.myList[index].completed ? 'Tarea Completada el : ${DateFormat('dd-MM-yyyy').format(widget.myList[index].initialDate)} \nEtiqueta: ${widget.myList[index].label}' : 'Fecha Limite para Realizar Tarea : ${DateFormat('dd-MM-yyyy').format(widget.myList[index].dueDate)} \nEtiqueta: ${widget.myList[index].label}' ),
         trailing : Icon(
           widget.myList[index].completed ? Icons.done : Icons.close,
           color: widget.myList[index].completed ? Color.fromARGB(255, 22, 174, 14) : Color.fromARGB(255, 193, 16, 16),

@@ -19,7 +19,7 @@ class _MyLabelListState extends State<MyLabelList> {
       itemBuilder: (context, index) => MyLabel(
         label: widget.myLabelList[index],
         index: index,
-      )
+      ),
     );
   }
 }

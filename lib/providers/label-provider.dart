@@ -16,27 +16,43 @@ class LabelList extends ChangeNotifier{
         _labelList.add(label);
       }
     }
+    notifyListeners();
   }
   
   void setLabelList(List<Label> newLabelList){
     print("call setLabelList");
     _labelList = [];
     for(var label in newLabelList){
-      if(label.info != "") {
+      if(label.info != "" && !label.isRemoved) {
         label.isTemp = false;
         _labelList.add(label);
       }
     }
+    notifyListeners();
   }
+  
   void addLabel(Label label){
     _labelList.add(label);
     notifyListeners();
   }
 
-  void removeLabel(int index) {
-    print("Presiono el indice ${index}");
-    _labelList.removeAt(index);
-    notifyListeners();
+  void updateLabels(List<Label> labelsList){
+    for (Label label in labelsList) {
+      if (label.isModified) {
+        label.info = label.newInfo;
+      } 
+    }
   }
+
+  List<String> getLabelFromList(){
+    List<String> labels = [];
+    for(Label label in _labelList){
+      print("Labels: ${label.getInfo}");
+      labels.add(label.getInfo);
+    }
+    return labels;
+  }
+
+
 
 }
