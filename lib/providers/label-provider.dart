@@ -23,7 +23,9 @@ class LabelList extends ChangeNotifier{
     print("call setLabelList");
     _labelList = [];
     for(var label in newLabelList){
-      if(label.info != "" && !label.isRemoved) {
+      if(label.info != "") {
+        print("LABEL");
+        print(label.info);
         label.isTemp = false;
         _labelList.add(label);
       }
@@ -51,6 +53,20 @@ class LabelList extends ChangeNotifier{
       labels.add(label.getInfo);
     }
     return labels;
+  }
+
+  void removeLabel(List<Label> newLabelList){
+    print("call setLabelList");
+    _labelList = [];
+    for(var label in newLabelList){
+      if(label.info != "" && !label.isRemoved) {
+        print("LABEL");
+        print(label.info);
+        label.isTemp = false;
+        _labelList.add(label);
+      }
+    }
+    notifyListeners();
   }
 
 

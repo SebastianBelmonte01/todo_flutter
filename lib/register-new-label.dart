@@ -67,20 +67,12 @@ class _MyNewLabelState extends State<MyNewLabel> {
             ElevatedButton(
               onPressed: (){
                 setState(() {
-                  print("Antes de Modificar: ");
-                  for(int i = 0; i < auxList.length; i++){
-                    print("Etiqueta ${i+1}: ${auxList[i].info}");
-                  }
-
                   context.read<LabelList>().updateLabels(auxList);
-
-                  print("Despues de Modificar: ");
-                  for(int i = 0; i < auxList.length; i++){
-                    print("Etiqueta ${i+1}: ${auxList[i].info}");
-                  }
-
                   context.read<LabelList>().setLabelList(auxList);
+                  context.read<LabelList>().removeLabel(auxList);
+
                 });
+                Navigator.pop(context);
               },
               child: Text("Guardar")),
             ElevatedButton(

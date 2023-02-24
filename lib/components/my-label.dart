@@ -52,10 +52,8 @@ class _MyLabelState extends State<MyLabel> {
                   onPressed: (){
                     setState(() {
                       context.read<LabelList>().labelList[widget.index].isRemoved = true;
+                      print("INDICE SELECCIONADO ${context.read<LabelList>().labelList[widget.index].getInfo}");
                     });
-                    for(int i = 0; i < context.read<LabelList>().labelList.length; i++){
-                      print("Etiqueta ${i+1}: ${context.read<LabelList>().labelList[i].getInfo}");
-                    }
                   }, 
                   child: const Icon(Icons.delete)
                 ),
