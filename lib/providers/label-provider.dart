@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../classes/Label.dart';
 
 class LabelList extends ChangeNotifier{
-  List<Label> _labelList = [Label("NUMERO", false), Label("NUMERO  2", false)];
+  List<Label> _labelList = [Label("Personal", false)];
   List<Label> get labelList => this._labelList;
 
   int get size => _labelList.length;
