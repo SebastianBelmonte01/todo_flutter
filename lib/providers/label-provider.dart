@@ -14,7 +14,7 @@ class LabelList extends ChangeNotifier{
     for(var label in newLabelList){
       if(!label.isTemp) {
         _labelList.add(label);
-      }
+      } 
     }
     notifyListeners();
   }
