@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_flutter/register-new-task.dart';
+import 'package:todo_flutter/todo.dart';
 
 class MyCredentials extends StatefulWidget {
   const MyCredentials({super.key});
@@ -57,7 +58,10 @@ class _MyCredentialsState extends State<MyCredentials> {
         ElevatedButton(
           onPressed:(){
             eraseCredentials(); 
-            Navigator.pushNamed(context, '/todo');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MyTodo()),
+            );
           },
           child: Text("Enviar")
         ),

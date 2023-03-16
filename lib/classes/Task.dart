@@ -11,23 +11,23 @@ class Task {
 
   get getTitle => this.title;
 
- set setTitle( title) => this.title = title;
+  set setTitle( title) => this.title = title;
 
   get getLabel => this.label;
 
- set setLabel( label) => this.label = label;
+  set setLabel( label) => this.label = label;
 
   get getCompleted => this.completed;
 
- set setCompleted( completed) => this.completed = completed;
+  set setCompleted( completed) => this.completed = completed;
 
   get getInitialDate => this.initialDate;
 
- set setInitialDate( initialDate) => this.initialDate = initialDate;
+  set setInitialDate( initialDate) => this.initialDate = initialDate;
 
   get getDueDate => this.dueDate;
 
- set setDueDate( dueDate) => this.dueDate = dueDate;
+  set setDueDate( dueDate) => this.dueDate = dueDate;
 
   Task(String title, String label, DateTime dueDate){
     this.title = title;

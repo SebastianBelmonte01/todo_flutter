@@ -40,7 +40,6 @@ class _MyLabelState extends State<MyLabel> {
                       //SE DEBE GUARDAR EN UNA VARIABLE EL CAMBIO PERO SE DEBE ACTAULIZAR 
                       widget.label.isModified = true;
                       widget.label.newInfo = value;
-
                     },
                     decoration: const InputDecoration(
                           border: OutlineInputBorder(),
