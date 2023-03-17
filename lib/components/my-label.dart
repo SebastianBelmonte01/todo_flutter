@@ -50,8 +50,8 @@ class _MyLabelState extends State<MyLabel> {
                 ElevatedButton(
                   onPressed: (){
                     setState(() {
-                      context.read<LabelList>().labelList[widget.index].isRemoved = true;
-                      print("INDICE SELECCIONADO ${context.read<LabelList>().labelList[widget.index].getInfo}");
+                      //context.read<LabelList>().labelList[widget.index].isRemoved = true;
+                      //print("INDICE SELECCIONADO ${context.read<LabelList>().labelList[widget.index].getInfo}");
                     });
                   }, 
                   child: const Icon(Icons.delete)

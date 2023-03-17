@@ -4,8 +4,10 @@ import 'package:todo_flutter/components/my-label.dart';
 import 'package:todo_flutter/providers/label-provider.dart';
 import 'package:todo_flutter/register-new-task.dart';
 
+import 'bloc/cubit/label/label_list_cubit.dart';
 import 'classes/Label.dart';
-import 'components/my-label-list.dart';
+import 'components/my-label-view.dart';
+
 
 class MyNewLabel extends StatefulWidget {
   const MyNewLabel({super.key});
@@ -18,20 +20,16 @@ class _MyNewLabelState extends State<MyNewLabel> {
   final labelController = TextEditingController();
   @override
   void dispose() {
-    // TODO: implement dispose
     labelController.clear();
     super.dispose();
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
-    List<Label> auxList = [...context.read<LabelList>().labelList];
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -44,7 +42,7 @@ class _MyNewLabelState extends State<MyNewLabel> {
         backgroundColor: Colors.blue[900],
         leading: BackButton(
           onPressed: (){
-            context.read<LabelList>().removeTemp(auxList);
+            //context.read<LabelList>().removeTemp(auxList);
             Navigator.pop(context);
           },
         )
@@ -55,29 +53,29 @@ class _MyNewLabelState extends State<MyNewLabel> {
             const Text("Etiquetas", style: const TextStyle(fontFamily: "Roboto", fontSize: 15, fontWeight: FontWeight.w800),),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.7,
-              child: MyLabelList(myLabelList: auxList),
+              //Here we need to call the list of labels
+              child: MyLabelList()
             ),
             ElevatedButton(
               onPressed: (){
                 setState(() {
-                  context.read<LabelList>().addLabel(Label("", true));
+                  //context.read<LabelList>().addLabel(Label("", true));
                 });
               }, 
               child: Text("Añadir")),
             ElevatedButton(
               onPressed: (){
                 setState(() {
-                  context.read<LabelList>().updateLabels(auxList);
-                  context.read<LabelList>().setLabelList(auxList);
-                  context.read<LabelList>().removeLabel(auxList);
+                  // context.read<LabelList>().updateLabels(auxList);
+                  // context.read<LabelList>().setLabelList(auxList);
+                  // context.read<LabelList>().removeLabel(auxList);
                   Navigator.pop(context);
-
                 });
               },
               child: Text("Guardar")),
             ElevatedButton(
               onPressed: (){
-                context.read<LabelList>().setLabelList(auxList);
+                // context.read<LabelList>().setLabelList(auxList);
                 Navigator.pop(context);
               },
               child: Text("Cerrar")),

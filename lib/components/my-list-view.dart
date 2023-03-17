@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_flutter/bloc/cubit/todo_list_cubit.dart';
 import 'package:todo_flutter/classes/Task.dart';
 import 'package:todo_flutter/register-new-task.dart';
 
 import 'package:intl/intl.dart';
+
+import '../bloc/cubit/todo/todo_list_cubit.dart';
 class MyListView extends StatefulWidget {
   MyListView({super.key});
   @override
@@ -14,10 +15,9 @@ class MyListView extends StatefulWidget {
 class _MyListViewState extends State<MyListView> {
   @override
   Widget build(BuildContext context) {
-    return  BlocConsumer<TodoListCubit, TodoListState>(
-      listener: (context, state) {},
+    return  BlocBuilder<TodoListCubit, TodoListState>(
       builder: (context, state) {
-        return     ListView.builder(
+        return ListView.builder(
                     itemCount: state.listOfTasks.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
@@ -39,10 +39,9 @@ class _MyListViewState extends State<MyListView> {
                       ), 
                       isThreeLine: true,
                       onLongPress: () {
-                        setState(() {
-                          state.listOfTasks[index].completed?state.listOfTasks[index].completed = false: state.listOfTasks[index].completed = true;
-                        });
-
+                        //FIX ME - In this case My State completed should be updated, however this widget is a cosummer but also a builder, so it is not possible to update the state of the cubit
+                        TodoListCubit todoListCubit = BlocProvider.of<TodoListCubit>(context);
+                        todoListCubit.completedTask(state.listOfTasks[index]);
                       },
                     ),
                   );

@@ -8,22 +8,22 @@ class Label {
   String newInfo = "";
 
 
- String get getInfo => this.info ;
+String get getInfo => this.info ;
 
- set setLabel(String info ) => this.info  = info  ;
+set setLabel(String info ) => this.info  = info  ;
 
- Label (String info, bool isTemp){
+Label (String info, bool isTemp){
   this.info = info;
   this.isTemp = isTemp;
   this.isModified = false;
   this.isRemoved = false;
   this.newInfo = "";
 
- }
+}
 
-  void setIsTemp(bool bool) {
+void setIsTemp(bool bool) {
     this.isTemp = bool;
-  }
+}
 
   List<String> getLabels(List<Label> labelsList) {
     List<String> labels = [];
@@ -32,5 +32,4 @@ class Label {
     }
     return labels;
   }
-
 }

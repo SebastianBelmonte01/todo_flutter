@@ -5,12 +5,15 @@ import 'package:textfield_datepicker/textfield_datepicker.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:todo_flutter/classes/Task.dart';
+import 'package:todo_flutter/components/my-dropdown.dart';
 import 'package:todo_flutter/providers/label-provider.dart';
 import 'package:todo_flutter/providers/task-provider.dart';
+import 'package:todo_flutter/register-new-label.dart';
 
 import 'package:todo_flutter/register-new-task.dart';
 import 'package:todo_flutter/todo.dart';
 
+import 'bloc/cubit/todo/todo_list_cubit.dart';
 import 'classes/Label.dart'; // for other locales
 
 
@@ -37,7 +40,6 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
   
   @override
   void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    // TODO: implement restoreState
     registerForRestoration(selectedDate, 'selected_date');
     registerForRestoration(
     _restorableDatePickerRouteFuture, 'date_picker_route_future');
@@ -88,10 +90,10 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
 
   @override
   Widget build(BuildContext context) {
-    List<String> list = context.read<LabelList>().getLabelFromList();
-    if(dropdownValue == ""){
-      dropdownValue = list.first;
-    } 
+    //List<String> list = context.read<LabelList>().getLabelFromList();
+    // if(dropdownValue == ""){
+    //   dropdownValue = list.first;
+    // } 
     return Scaffold(
       appBar: AppBar(title: const Text("Añadir Tarea", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
       body: Padding(
@@ -131,27 +133,36 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                 style: TextStyle(fontFamily: "Roboto", fontSize: 15, fontWeight: FontWeight.w800),),
             Row(
               children: [
-                DropdownButton(
-                  value: dropdownValue, 
-                  onChanged: (String? value) {
-                    setState(() {
-                      dropdownValue = value!;
-                      print("Sleccionado: $value");
-                    });
-                  },
-                  items: list.map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),   
-                ),
+                //Make a BlockBuilder using the LabelListCubit and a DropdownButton
+                // BlocBuilder(builder:                
+                // DropdownButton(
+                //   value: dropdownValue, 
+                //   onChanged: (String? value) {
+                //     setState(() {
+                //       dropdownValue = value!;
+                //       print("Sleccionado: $value");
+                //     });
+                //   },
+                //   items: list.map<DropdownMenuItem<String>>((String value) {
+                //     return DropdownMenuItem<String>(
+                //       value: value,
+                //       child: Text(value),
+                //     );
+                //   }).toList(),   
+                // ),
+                // ),
+                
+                //MyDropDown(),
+                
                 const SizedBox(
                   width: 30,
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/register-new-labels');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyNewLabel()),
+                    );
                   }, 
                   child: const Icon(Icons.edit)
                 ),
@@ -162,9 +173,8 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                 children: [
                   ElevatedButton(
                     onPressed: (){
-                      print("Valor de DropDOWN $dropdownValue");
-                      Task newTask = Task(taskNameController.text, dropdownValue, selectedDate.value);
-                      context.read<TodoList>().addTask(newTask);
+                      Task newTask = Task(taskNameController.text, "dropdownValue", selectedDate.value);
+                      context.read<TodoListCubit>().addTask(newTask);
                       Navigator.pushAndRemoveUntil<void>(
                         context,
                         MaterialPageRoute<void>(builder: (BuildContext context) => MyTodo()),

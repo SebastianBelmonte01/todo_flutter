@@ -5,7 +5,6 @@ import 'package:todo_flutter/register-new-task.dart';
 import 'package:todo_flutter/components/my-list-view.dart';
 import 'package:todo_flutter/classes/Task.dart';
 
-import 'bloc/cubit/todo_list_cubit.dart';
 
 
 // class ToDoOption extends StatelessWidget {
@@ -61,19 +60,13 @@ class _MyTodoState extends State<MyTodo> {
     
     return Scaffold(
       appBar: AppBar(title: const Text("ToDo List", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
-      body: BlocBuilder<TodoListCubit, TodoListState>(
-        builder: (context, state) {
-          return MyListView();
-        },
-      ),
+      body: MyListView(),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
-          //Se debe pasar la lista vacia
-           // Navigator.pushNamed(context, '/register-new-tasks')
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => MyRegistrationTask()
+              builder: (context) => const MyRegistrationTask()
             )
           )
         },

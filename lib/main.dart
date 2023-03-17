@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_flutter/bloc/cubit/label/label_list_cubit.dart';
 import 'package:todo_flutter/login.dart';
 import 'package:todo_flutter/providers/label-provider.dart';
 import 'package:todo_flutter/providers/task-provider.dart';
@@ -10,7 +11,8 @@ import 'package:todo_flutter/register-new-label.dart';
 
 import 'package:todo_flutter/classes/Task.dart';
 
-import 'bloc/cubit/todo_list_cubit.dart';
+import 'bloc/cubit/todo/todo_list_cubit.dart';
+
 
 
 void main() {
@@ -39,6 +41,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<TodoListCubit>(
           create: (context) => TodoListCubit(),
+        ),
+        BlocProvider<LabelListCubit>(
+          create: (context) => LabelListCubit(),
         ),
         // ChangeNotifierProvider(create: (_) => TodoList()),
         // ChangeNotifierProvider(create: (_) => LabelList())
