@@ -4,5 +4,5 @@ class LabelListState {
   final List<Label> listOfLabels;
   LabelListState({required this.listOfLabels});
 
-  get labelList => null;
+  get labelList => listOfLabels;
 }

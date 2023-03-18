@@ -16,8 +16,7 @@ class MyDropDown extends StatefulWidget {
 class _MyDropDownState extends State<MyDropDown> {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LabelListCubit, LabelListState>(
-      listener: (context, state){},
+    return BlocBuilder<LabelListCubit, LabelListState>(
       builder: (context, state){
         if(dropdownValue == ""){
           dropdownValue = state.listOfLabels[0].info;

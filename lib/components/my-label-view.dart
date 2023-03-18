@@ -14,6 +14,7 @@ class MyLabelList extends StatefulWidget {
 class _MyLabelListState extends State<MyLabelList> {
   @override
   Widget build(BuildContext context) {
+        LabelListCubit labelListCubit = context.read<LabelListCubit>();
         return BlocBuilder<LabelListCubit,LabelListState>(
           builder: (context, state) {
             return ListView.builder(
@@ -25,9 +26,7 @@ class _MyLabelListState extends State<MyLabelList> {
                         child: TextFormField(
                           initialValue: state.listOfLabels[index].info,
                           onChanged: (value){
-                            //SE DEBE GUARDAR EN UNA VARIABLE EL CAMBIO PERO SE DEBE ACTAULIZAR 
-                            state.listOfLabels[index].isModified = true;
-                            state.listOfLabels[index].newInfo = value;
+                            labelListCubit.updateLabel(index, value);
                           },
                           decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
@@ -35,15 +34,16 @@ class _MyLabelListState extends State<MyLabelList> {
                               ),
                         ), 
                       ),
-                      // ElevatedButton(
-                      //   onPressed: (){
-                      //     setState(() {
-                      //       //context.read<LabelList>().labelList[widget.index].isRemoved = true;
-                      //       //print("INDICE SELECCIONADO ${context.read<LabelList>().labelList[widget.index].getInfo}");
-                      //     });
-                      //   }, 
-                      //   child: const Icon(Icons.delete)
-                      // ),
+                      ElevatedButton(
+                        onPressed: (){
+                          labelListCubit.removeLabelTemporaly(index);
+                          // setState(() {
+                          //   //context.read<LabelList>().labelList[widget.index].isRemoved = true;
+                          //   //print("INDICE SELECCIONADO ${context.read<LabelList>().labelList[widget.index].getInfo}");
+                          // });
+                        }, 
+                        child: const Icon(Icons.delete)
+                      ),
                   ]
                 );
               }

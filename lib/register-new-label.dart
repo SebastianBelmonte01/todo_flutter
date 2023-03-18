@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_flutter/components/my-label.dart';
 import 'package:todo_flutter/providers/label-provider.dart';
 import 'package:todo_flutter/register-new-task.dart';
 
@@ -30,6 +29,8 @@ class _MyNewLabelState extends State<MyNewLabel> {
   }
   @override
   Widget build(BuildContext context) {
+    LabelListCubit labelListCubit = context.read<LabelListCubit>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -56,21 +57,22 @@ class _MyNewLabelState extends State<MyNewLabel> {
               //Here we need to call the list of labels
               child: MyLabelList()
             ),
+            
             ElevatedButton(
+              //We have to add a new label to the list this shold be like Label("", true)
               onPressed: (){
-                setState(() {
-                  //context.read<LabelList>().addLabel(Label("", true));
-                });
+                labelListCubit.addTemporalLabel();
               }, 
               child: Text("Añadir")),
             ElevatedButton(
               onPressed: (){
-                setState(() {
-                  // context.read<LabelList>().updateLabels(auxList);
-                  // context.read<LabelList>().setLabelList(auxList);
-                  // context.read<LabelList>().removeLabel(auxList);
-                  Navigator.pop(context);
-                });
+                labelListCubit.updateLabelList();
+                // setState(() {
+                //   // context.read<LabelList>().updateLabels(auxList);
+                //   // context.read<LabelList>().setLabelList(auxList);
+                //   // context.read<LabelList>().removeLabel(auxList);
+                //   //Navigator.pop(context);
+                // });
               },
               child: Text("Guardar")),
             ElevatedButton(
