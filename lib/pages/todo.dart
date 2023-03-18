@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_flutter/providers/task-provider.dart';
-import 'package:todo_flutter/register-new-task.dart';
+import 'package:todo_flutter/pages/register-new-task.dart';
 import 'package:todo_flutter/components/my-list-view.dart';
 import 'package:todo_flutter/classes/Task.dart';
 

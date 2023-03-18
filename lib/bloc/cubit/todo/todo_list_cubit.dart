@@ -10,8 +10,10 @@ class TodoListCubit extends Cubit<TodoListState> {
   //Add an element to the list
   void addTask(Task task) {
     List<Task> newList = state.listOfTasks;
-    newList.add(task);
-    emit(TodoListState(listOfTasks: newList));
+    if(task.title != "") {
+      newList.add(task);
+      emit(TodoListState(listOfTasks: newList));
+    }
   }
 
   void completedTask(Task task) {

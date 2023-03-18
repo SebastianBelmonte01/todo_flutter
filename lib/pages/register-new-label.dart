@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_flutter/providers/label-provider.dart';
-import 'package:todo_flutter/register-new-task.dart';
+import 'package:todo_flutter/pages/register-new-task.dart';
 
-import 'bloc/cubit/label/label_list_cubit.dart';
-import 'classes/Label.dart';
-import 'components/my-label-view.dart';
+import '../bloc/cubit/label/label_list_cubit.dart';
+import '../classes/Label.dart';
+import '../components/my-label-view.dart';
 
 
 class MyNewLabel extends StatefulWidget {

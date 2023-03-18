@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_flutter/register-new-task.dart';
-import 'package:todo_flutter/todo.dart';
+import 'package:todo_flutter/pages/register-new-task.dart';
+import 'package:todo_flutter/pages/todo.dart';
 
 class MyCredentials extends StatefulWidget {
   const MyCredentials({super.key});

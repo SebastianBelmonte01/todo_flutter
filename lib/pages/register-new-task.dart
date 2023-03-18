@@ -6,15 +6,13 @@ import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:todo_flutter/classes/Task.dart';
 import 'package:todo_flutter/components/my-dropdown.dart';
-import 'package:todo_flutter/providers/label-provider.dart';
-import 'package:todo_flutter/providers/task-provider.dart';
-import 'package:todo_flutter/register-new-label.dart';
+import 'package:todo_flutter/pages/register-new-label.dart';
 
-import 'package:todo_flutter/register-new-task.dart';
-import 'package:todo_flutter/todo.dart';
+import 'package:todo_flutter/pages/register-new-task.dart';
+import 'package:todo_flutter/pages/todo.dart';
 
-import 'bloc/cubit/todo/todo_list_cubit.dart';
-import 'classes/Label.dart'; // for other locales
+import '../bloc/cubit/todo/todo_list_cubit.dart';
+import '../classes/Label.dart'; // for other locales
 
 
 
@@ -133,27 +131,7 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                 style: TextStyle(fontFamily: "Roboto", fontSize: 15, fontWeight: FontWeight.w800),),
             Row(
               children: [
-                //Make a BlockBuilder using the LabelListCubit and a DropdownButton
-                // BlocBuilder(builder:                
-                // DropdownButton(
-                //   value: dropdownValue, 
-                //   onChanged: (String? value) {
-                //     setState(() {
-                //       dropdownValue = value!;
-                //       print("Sleccionado: $value");
-                //     });
-                //   },
-                //   items: list.map<DropdownMenuItem<String>>((String value) {
-                //     return DropdownMenuItem<String>(
-                //       value: value,
-                //       child: Text(value),
-                //     );
-                //   }).toList(),   
-                // ),
-                // ),
-                
-                //MyDropDown(),
-                
+                const MyDropDown(),
                 const SizedBox(
                   width: 30,
                 ),
