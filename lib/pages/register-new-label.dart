@@ -66,12 +66,6 @@ class _MyNewLabelState extends State<MyNewLabel> {
             ElevatedButton(
               onPressed: (){
                 labelListCubit.updateLabelList();
-                // setState(() {
-                //   // context.read<LabelList>().updateLabels(auxList);
-                //   // context.read<LabelList>().setLabelList(auxList);
-                //   // context.read<LabelList>().removeLabel(auxList);
-                //   //Navigator.pop(context);
-                // });
               },
               child: Text("Guardar")),
             ElevatedButton(

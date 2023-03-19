@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_flutter/bloc/cubit/dropdown/dropdowncubit_cubit.dart';
 
 import '../bloc/cubit/label/label_list_cubit.dart';
 import '../classes/Label.dart';
 
-String dropdownValue = "";
 
 class MyDropDown extends StatefulWidget {
   const MyDropDown({super.key});
@@ -14,28 +14,26 @@ class MyDropDown extends StatefulWidget {
 }
 
 class _MyDropDownState extends State<MyDropDown> {
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LabelListCubit, LabelListState>(
+    final labelListCubit = context.watch<LabelListCubit>().state;
+
+    return BlocBuilder<DropdownCubit, DropdownCubitState>(
       builder: (context, state){
-        if(dropdownValue == ""){
-          dropdownValue = state.listOfLabels[0].info;
-          print("VALOR DE DROP $dropdownValue");
+        if(state.dropdownValue == ""){
+          state.dropdownValue = labelListCubit.listOfLabels[0].info;
         } 
         return DropdownButton(
-          value: dropdownValue,
-          items: state.listOfLabels.map<DropdownMenuItem<String>>((Label value) {
+          value: state.dropdownValue,
+          items: labelListCubit.listOfLabels.map<DropdownMenuItem<String>>((Label value) {
             return DropdownMenuItem<String>(
               value: value.info,
               child: Text(value.info),
             );
           }).toList(),
-          //FIXME : Having the same trouble as in the list of tasks
           onChanged: (String? value) {
-            setState(() {
-                dropdownValue = value!;
-                print(dropdownValue);
-            });
+            context.read<DropdownCubit>().updateDropdownValue(value!);
           },
         );
       },

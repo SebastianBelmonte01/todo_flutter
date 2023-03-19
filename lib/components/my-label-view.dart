@@ -37,10 +37,6 @@ class _MyLabelListState extends State<MyLabelList> {
                       ElevatedButton(
                         onPressed: (){
                           labelListCubit.removeLabelTemporaly(index);
-                          // setState(() {
-                          //   //context.read<LabelList>().labelList[widget.index].isRemoved = true;
-                          //   //print("INDICE SELECCIONADO ${context.read<LabelList>().labelList[widget.index].getInfo}");
-                          // });
                         }, 
                         child: const Icon(Icons.delete)
                       ),
@@ -54,14 +50,5 @@ class _MyLabelListState extends State<MyLabelList> {
     }
     
   }
-
-/*
-ListView.builder(
-      itemCount: widget.myLabelList.length,
-      itemBuilder: (context, index) => MyLabel(
-        label: widget.myLabelList[index],
-        index: index,
-      ),
-    );
-*/
+  
 

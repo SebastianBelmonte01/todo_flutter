@@ -25,11 +25,4 @@ void setIsTemp(bool bool) {
     this.isTemp = bool;
 }
 
-  List<String> getLabels(List<Label> labelsList) {
-    List<String> labels = [];
-    for (Label label in labelsList){
-      labels.add(label.getInfo);
-    }
-    return labels;
-  }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_flutter/classes/Task.dart';
-import 'package:todo_flutter/register-new-task.dart';
+import 'package:todo_flutter/pages/register-new-task.dart';
 
 import 'package:intl/intl.dart';
 
@@ -18,15 +18,16 @@ class _MyListViewState extends State<MyListView> {
     return  BlocBuilder<TodoListCubit, TodoListState>(
       builder: (context, state) {
         return ListView.builder(
-                    itemCount: state.listOfTasks.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black45
-                      ) 
-                    ),
-                    child: ListTile(
+          itemCount: state.listOfTasks.length,
+          itemBuilder: (BuildContext context, int index) {
+              return Container(
+                decoration: BoxDecoration(
+                  border: 
+                    Border.all(
+                      color: Colors.black45
+                    ) 
+                ),
+                child: ListTile(  
                       title: Text(state.listOfTasks[index].title,
                           style: const TextStyle(
                             fontWeight: FontWeight.w500,
@@ -39,18 +40,13 @@ class _MyListViewState extends State<MyListView> {
                       ), 
                       isThreeLine: true,
                       onLongPress: () {
-                        //FIX ME - In this case My State completed should be updated, however this widget is a cosummer but also a builder, so it is not possible to update the state of the cubit
-                        TodoListCubit todoListCubit = BlocProvider.of<TodoListCubit>(context);
-                        todoListCubit.completedTask(state.listOfTasks[index]);
+                        context.read<TodoListCubit>().completedTask(state.listOfTasks[index]);
                       },
-                    ),
-                  );
-                    },
-                  );
+                ),
+              );
+          },
+        );
       },
     );
-    
-
   }
-
 }

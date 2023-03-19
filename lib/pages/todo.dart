@@ -55,8 +55,6 @@ class _MyTodoState extends State<MyTodo> {
   
   @override
   Widget build(BuildContext context) {
-    //List<Task> myTodoList = context.watch<TodoListCubit>().state;
-    
     return Scaffold(
       appBar: AppBar(title: const Text("ToDo List", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
       body: MyListView(),
@@ -71,7 +69,6 @@ class _MyTodoState extends State<MyTodo> {
         },
         child: const Icon(Icons.add),
       ),
-      
     );
   }
 }

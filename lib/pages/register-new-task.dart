@@ -11,6 +11,7 @@ import 'package:todo_flutter/pages/register-new-label.dart';
 import 'package:todo_flutter/pages/register-new-task.dart';
 import 'package:todo_flutter/pages/todo.dart';
 
+import '../bloc/cubit/dropdown/dropdowncubit_cubit.dart';
 import '../bloc/cubit/todo/todo_list_cubit.dart';
 import '../classes/Label.dart'; // for other locales
 
@@ -88,10 +89,8 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
 
   @override
   Widget build(BuildContext context) {
-    //List<String> list = context.read<LabelList>().getLabelFromList();
-    // if(dropdownValue == ""){
-    //   dropdownValue = list.first;
-    // } 
+    final labelSelected = context.watch<DropdownCubit>().state.dropdownValue;
+
     return Scaffold(
       appBar: AppBar(title: const Text("Añadir Tarea", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
       body: Padding(
@@ -151,7 +150,7 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                 children: [
                   ElevatedButton(
                     onPressed: (){
-                      Task newTask = Task(taskNameController.text, "dropdownValue", selectedDate.value);
+                      Task newTask = Task(taskNameController.text, labelSelected, selectedDate.value);
                       context.read<TodoListCubit>().addTask(newTask);
                       Navigator.pushAndRemoveUntil<void>(
                         context,
