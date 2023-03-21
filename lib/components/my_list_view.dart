@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_flutter/classes/Task.dart';
-import 'package:todo_flutter/pages/register-new-task.dart';
+import 'package:todo_flutter/pages/register_new_task.dart';
 
 import 'package:intl/intl.dart';
 

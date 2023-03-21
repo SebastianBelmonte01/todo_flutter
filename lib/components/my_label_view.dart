@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_flutter/components/MyIconButton.dart';
 
 import '../bloc/cubit/label/label_list_cubit.dart';
 import '../classes/Label.dart';
+import 'my_icon_button.dart';
 
 class MyLabelList extends StatefulWidget {
   MyLabelList({super.key});

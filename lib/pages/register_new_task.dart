@@ -5,18 +5,17 @@ import 'package:textfield_datepicker/textfield_datepicker.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:todo_flutter/classes/Task.dart';
-import 'package:todo_flutter/components/my-dropdown.dart';
-import 'package:todo_flutter/pages/register-new-label.dart';
+import 'package:todo_flutter/components/my_dropdown.dart';
+import 'package:todo_flutter/pages/register_new_label.dart';
 
-import 'package:todo_flutter/pages/register-new-task.dart';
+import 'package:todo_flutter/pages/register_new_task.dart';
 import 'package:todo_flutter/pages/todo.dart';
 
 import '../bloc/cubit/dropdown/dropdowncubit_cubit.dart';
 import '../bloc/cubit/todo/todo_list_cubit.dart';
 import '../classes/Label.dart';
-import '../components/MyIconButton.dart';
-import '../components/my-button.dart'; // for other locales
-
+import '../components/my_button.dart';
+import '../components/my_icon_button.dart';
 
 
   // List<String> list = contex.read<LabelList>().getLabelFromList();

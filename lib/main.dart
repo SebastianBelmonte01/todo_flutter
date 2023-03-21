@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_flutter/bloc/cubit/label/label_list_cubit.dart';
 import 'package:todo_flutter/pages/login.dart';
-import 'package:todo_flutter/pages/register-new-task.dart';
+import 'package:todo_flutter/pages/register_new_task.dart';
 import 'package:todo_flutter/pages/todo.dart';
-import 'package:todo_flutter/pages/register-new-label.dart';
+import 'package:todo_flutter/pages/register_new_label.dart';
 
 import 'package:todo_flutter/classes/Task.dart';
 

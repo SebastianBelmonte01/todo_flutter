@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:todo_flutter/pages/register-new-task.dart';
+import 'package:todo_flutter/pages/register_new_task.dart';
 import 'package:todo_flutter/pages/todo.dart';
 
-import '../components/my-button.dart';
+import '../components/my_button.dart';
+
 
 class MyCredentials extends StatefulWidget {
   const MyCredentials({super.key});

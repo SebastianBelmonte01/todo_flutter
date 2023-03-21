@@ -13,12 +13,6 @@ class MyButton extends StatelessWidget {
       onPressed: () {
         onPressed(); 
       },
-      child: Text(
-              text, 
-              style: TextStyle(
-                  color: Color.fromARGB(255, 255, 255, 255)
-              ),
-            ),
       style: ElevatedButton.styleFrom(
         minimumSize: Size(100, 45),
         primary: Color(0xFF0D47A1),
@@ -28,6 +22,12 @@ class MyButton extends StatelessWidget {
         ),
         
       ),
+      child: Text(
+              text, 
+              style: const TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255)
+              ),
+            ),
 
     );
   }
