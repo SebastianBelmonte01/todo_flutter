@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:todo_flutter/pages/register-new-task.dart';
 import 'package:todo_flutter/pages/todo.dart';
 
+import '../components/my-button.dart';
+
 class MyCredentials extends StatefulWidget {
   const MyCredentials({super.key});
 
@@ -55,15 +57,18 @@ class _MyCredentialsState extends State<MyCredentials> {
               ),
           ),
         ),
-        ElevatedButton(
-          onPressed:(){
+        const SizedBox(
+          height: 10,
+        ),
+        MyButton(
+          onPressed: () {  
             eraseCredentials(); 
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => MyTodo()),
             );
-          },
-          child: Text("Enviar")
+          }, 
+          text: 'Enviar',
         ),
       ],
     );
@@ -75,7 +80,7 @@ class MyLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Login", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
+      appBar: AppBar(title: const Text("Login", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Color(0xFF0D47A1),),
       body: const Center(
         child: MyCredentials()
       ),

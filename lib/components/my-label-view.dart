@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_flutter/components/MyIconButton.dart';
 
 import '../bloc/cubit/label/label_list_cubit.dart';
 import '../classes/Label.dart';
@@ -34,11 +35,11 @@ class _MyLabelListState extends State<MyLabelList> {
                               ),
                         ), 
                       ),
-                      ElevatedButton(
+                      MyIconButton(
                         onPressed: (){
                           labelListCubit.removeLabelTemporaly(index);
                         }, 
-                        child: const Icon(Icons.delete)
+                        icon: const Icon(Icons.delete)
                       ),
                   ]
                 );

@@ -4,6 +4,7 @@ import 'package:todo_flutter/pages/register-new-task.dart';
 
 import '../bloc/cubit/label/label_list_cubit.dart';
 import '../classes/Label.dart';
+import '../components/my-button.dart';
 import '../components/my-label-view.dart';
 
 
@@ -56,24 +57,25 @@ class _MyNewLabelState extends State<MyNewLabel> {
               //Here we need to call the list of labels
               child: MyLabelList()
             ),
-            
-            ElevatedButton(
-              //We have to add a new label to the list this shold be like Label("", true)
+            MyButton(
               onPressed: (){
                 labelListCubit.addTemporalLabel();
-              }, 
-              child: Text("Añadir")),
-            ElevatedButton(
+              },
+              text: "Añadir", 
+            ),
+            MyButton(
               onPressed: (){
                 labelListCubit.updateLabelList();
               },
-              child: Text("Guardar")),
-            ElevatedButton(
+              text: "Guardar"
+            ),
+            MyButton(
               onPressed: (){
                 // context.read<LabelList>().setLabelList(auxList);
                 Navigator.pop(context);
               },
-              child: Text("Cerrar")),
+              text: "Cerrar"
+            ),
           ],
         ),
       ),

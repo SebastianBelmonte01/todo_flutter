@@ -13,7 +13,9 @@ import 'package:todo_flutter/pages/todo.dart';
 
 import '../bloc/cubit/dropdown/dropdowncubit_cubit.dart';
 import '../bloc/cubit/todo/todo_list_cubit.dart';
-import '../classes/Label.dart'; // for other locales
+import '../classes/Label.dart';
+import '../components/MyIconButton.dart';
+import '../components/my-button.dart'; // for other locales
 
 
 
@@ -117,12 +119,12 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                     style: const TextStyle(fontFamily: "Roboto", fontSize: 15, fontWeight: FontWeight.w800),
                   ),
                 ),
-                ElevatedButton(
+                MyIconButton(
                   onPressed: (){
                     _restorableDatePickerRouteFuture.present();
                     print(selectedDate.value.day);
                   }, 
-                  child: const Icon(Icons.calendar_month)
+                  icon: const Icon(Icons.calendar_month)
                 ),
               ],
             ),
@@ -134,21 +136,21 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                 const SizedBox(
                   width: 30,
                 ),
-                ElevatedButton(
+                MyIconButton(
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => MyNewLabel()),
                     );
                   }, 
-                  child: const Icon(Icons.edit)
+                  icon: const Icon(Icons.edit)
                 ),
               ],
             ),
             Center(
               child: Column(
                 children: [
-                  ElevatedButton(
+                  MyButton(
                     onPressed: (){
                       Task newTask = Task(taskNameController.text, labelSelected, selectedDate.value);
                       context.read<TodoListCubit>().addTask(newTask);
@@ -157,11 +159,14 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                         MaterialPageRoute<void>(builder: (BuildContext context) => MyTodo()),
                         ModalRoute.withName('/'),
                       );
-                    }, child: Text("Guardar")),
-                  ElevatedButton(
+                    }, text: "Guardar"
+                  ),
+                  MyButton(
                     onPressed: (){
                       Navigator.pop(context);
-                    }, child: Text("Cancelar"))
+                    },
+                    text: "Cancelar"
+                  ),
                 ],
               ),
             )

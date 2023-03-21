@@ -4,6 +4,8 @@ import 'package:todo_flutter/pages/register-new-task.dart';
 import 'package:todo_flutter/components/my-list-view.dart';
 import 'package:todo_flutter/classes/Task.dart';
 
+import '../components/my-button.dart';
+
 
 
 // class ToDoOption extends StatelessWidget {
@@ -56,7 +58,7 @@ class _MyTodoState extends State<MyTodo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("ToDo List", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
+      appBar: AppBar(title: const Text("ToDo List", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Color(0xFF0D47A1),),
       body: MyListView(),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
