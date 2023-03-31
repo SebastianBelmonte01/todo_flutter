@@ -15,7 +15,7 @@ import 'bloc/cubit/todo/todo_list_cubit.dart';
 
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

@@ -139,7 +139,7 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => MyNewLabel()),
+                      MaterialPageRoute(builder: (context) => const MyNewLabel()),
                     );
                   }, 
                   icon: const Icon(Icons.edit)
