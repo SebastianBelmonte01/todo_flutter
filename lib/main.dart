@@ -9,7 +9,6 @@ import 'package:todo_flutter/pages/register_new_label.dart';
 
 import 'package:todo_flutter/classes/Task.dart';
 
-import 'bloc/cubit/dropdown/dropdowncubit_cubit.dart';
 import 'bloc/cubit/todo/todo_list_cubit.dart';
 
 
@@ -34,9 +33,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<LabelListCubit>(
           create: (context) => LabelListCubit(),
         ),
-        BlocProvider<DropdownCubit>(
-          create: (context) => DropdownCubit(),
-        ),
+
       ],
       child: MaterialApp(
         initialRoute: '/',

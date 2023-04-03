@@ -69,6 +69,7 @@ class _MyTodoState extends State<MyTodo> {
             )
           )
         },
+        backgroundColor: Color(0xFF0D47A1) ,
         child: const Icon(Icons.add),
       ),
     );

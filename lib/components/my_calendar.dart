@@ -62,7 +62,7 @@ class _MyCalendarState extends State<MyCalendar> with RestorationMixin {
       context.read<DatepickerCubit>().updateDatedPicked(newSelectedDate);
       setState(() {
         //_TODO dueDate debe encontrarse en el estado del widget padre.
-        _dueDate = "${selectedDate.value.day} / ${selectedDate.value.month} / ${selectedDate.value.year}" ;
+        //_dueDate = "${selectedDate.value.day} / ${selectedDate.value.month} / ${selectedDate.value.year}" ;
       });
     }
   }

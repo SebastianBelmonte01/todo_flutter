@@ -5,31 +5,31 @@ import 'package:todo_flutter/classes/Label.dart';
 part 'label_list_state.dart';
 
 class LabelListCubit extends Cubit<LabelListState> {
-  LabelListCubit() : super(LabelListState(listOfLabels: [Label("label", false)]));
+  LabelListCubit() : super(LabelListState(listOfLabels: [Label("label", false, 0)], selectedLabelIndex: 0));
 
   void addLabel(String label) {
     List<Label> list = state.listOfLabels;
-    list.add(Label(label, false));
-    emit(LabelListState(listOfLabels: list));
+    list.add(Label(label, false, list.length));
+    emit(LabelListState(listOfLabels: list, selectedLabelIndex: 0));
   }
 
   void removeLabel(String label) {
     List<Label> list = state.listOfLabels;
     list.removeWhere((element) => element.info == label);
-    emit(LabelListState(listOfLabels: list));
+    emit(LabelListState(listOfLabels: list, selectedLabelIndex: 0));
   }
 
   void addTemporalLabel() {
     List<Label> list = state.listOfLabels;
-    list.add(Label("", true));
-    emit(LabelListState(listOfLabels: list));
+    list.add(Label("", true, list.length));
+    emit(LabelListState(listOfLabels: list, selectedLabelIndex: 0));
   }
 
   void removeLabelTemporaly(int index) {
     List<Label> list = state.listOfLabels;
     //Search in the list by index and modify the label with removed = true
     list[index].isRemoved = true;
-    emit(LabelListState(listOfLabels: list));
+    emit(LabelListState(listOfLabels: list, selectedLabelIndex: 0));
   }
 
   void updateLabel(int index, String newLabel) {
@@ -41,7 +41,7 @@ class LabelListCubit extends Cubit<LabelListState> {
     if(list[index].info == ""){
         list[index].info = newLabel; 
     }
-    emit(LabelListState(listOfLabels: list));
+    emit(LabelListState(listOfLabels: list, selectedLabelIndex: 0));
   }
 
   void updateLabelList(){
@@ -57,7 +57,13 @@ class LabelListCubit extends Cubit<LabelListState> {
         aux.add(label);
       } 
     }
-    emit(LabelListState(listOfLabels: aux));
+    emit(LabelListState(listOfLabels: aux, selectedLabelIndex: 0));
+  }
+
+  void updateSelectedLabel(String selectedLabel){
+    int index = state.listOfLabels.indexWhere((element) => element.info == selectedLabel);
+    print("El indice seleccionado ahora es el $index");
+    emit(LabelListState(listOfLabels: state.listOfLabels, selectedLabelIndex: index));
   }
 
 

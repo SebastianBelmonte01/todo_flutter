@@ -6,7 +6,7 @@ import '../../../classes/Task.dart';
 part 'todo_list_state.dart';
 
 class TodoListCubit extends Cubit<TodoListState> {
-  TodoListCubit() : super(TodoListState(listOfTasks: [Task("title", "label", DateTime.now())]));
+  TodoListCubit() : super(TodoListState(listOfTasks: []));
   //Add an element to the list
   void addTask(Task task) {
     List<Task> newList = state.listOfTasks;
