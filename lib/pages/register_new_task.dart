@@ -96,7 +96,6 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
               controller: taskNameController,
@@ -125,28 +124,42 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                 ),
               ],
             ),
-            const Text("Seleccione una Etiqueta:   ",
-                style: TextStyle(fontFamily: "Roboto", fontSize: 15, fontWeight: FontWeight.w800),),
-            Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const MyDropDown(),
                 const SizedBox(
-                  width: 30,
+                    height: 20,
                 ),
-                MyIconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const MyNewLabel()),
-                    );
-                  }, 
-                  icon: const Icon(Icons.edit)
+                const Text("Seleccione una Etiqueta:   ",
+                    style: TextStyle(fontFamily: "Roboto", fontSize: 15, fontWeight: FontWeight.w800),),
+                const SizedBox(
+                    height: 7,
+                ), 
+                Row(
+                  children: [
+                    const MyDropDown(),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    MyIconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const MyNewLabel()),
+                        );
+                      }, 
+                      icon: const Icon(Icons.edit)
+                    ),
+                  ],
                 ),
-              ],
+              ]
             ),
-            Center(
-              child: Column(
-                children: [
+            Column(
+              
+              children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.1,
+                  ),
                   MyButton(
                     onPressed: (){
                       Task newTask = Task(taskNameController.text, selectedLabel, selectedDate.value);
@@ -164,8 +177,8 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                     },
                     text: "Cancelar"
                   ),
-                ],
-              ),
+                
+              ]
             )
           ],
         ),

@@ -18,18 +18,26 @@ class _MyDropDownState extends State<MyDropDown> {
   Widget build(BuildContext context) {
     return BlocBuilder<LabelListCubit, LabelListState>(
       builder: (context, state){
-        return DropdownButton(
-          value: state.listOfLabels[state.selectedLabelIndex].info,
-          items: state.listOfLabels.map<DropdownMenuItem<String>>((Label value) {
-            return DropdownMenuItem<String>(
-              value: value.info,
-              child: Text(value.info),
-            );
-          }).toList(),
-          onChanged: (String? selectedLabel) {
-            //state.selectedLabelIndex = state.listOfLabels.indexWhere((element) => element.info == selectedLabel);
-            context.read<LabelListCubit>().updateSelectedLabel(selectedLabel!);
-          }
+        return SizedBox(
+          width: MediaQuery.of(context).size.width * 0.7,
+          child: 
+            DropdownButton(
+              //Make the size of the dropdown button the same as the textfiel
+              isExpanded: true,
+              
+              value: state.listOfLabels[state.selectedLabelIndex].info,
+              items: state.listOfLabels.map<DropdownMenuItem<String>>((Label value) {
+                return DropdownMenuItem<String>(
+                  value: value.info,
+                  child: Text(value.info),
+                );
+              }).toList(),
+              onChanged: (String? selectedLabel) {
+                //state.selectedLabelIndex = state.listOfLabels.indexWhere((element) => element.info == selectedLabel);
+                //context.read<LabelListCubit>().updateSelectedLabel(selectedLabel!);
+                BlocProvider.of<LabelListCubit>(context).updateSelectedLabel(selectedLabel!);
+              }
+            )
         );
       },
     );

@@ -8,29 +8,12 @@ import '../components/my_button.dart';
 import '../components/my_label_view.dart';
 
 
-class MyNewLabel extends StatefulWidget {
+class MyNewLabel extends StatelessWidget {
   const MyNewLabel({super.key});
 
   @override
-  State<MyNewLabel> createState() => _MyNewLabelState();
-}
-
-class _MyNewLabelState extends State<MyNewLabel> {
-  final labelController = TextEditingController();
-  @override
-  void dispose() {
-    labelController.clear();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
-  @override
   Widget build(BuildContext context) {
-    LabelListCubit labelListCubit = context.read<LabelListCubit>();
-
+    //LabelListCubit labelListCubit = context.read<LabelListCubit>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -54,18 +37,20 @@ class _MyNewLabelState extends State<MyNewLabel> {
             const Text("Etiquetas", style: const TextStyle(fontFamily: "Roboto", fontSize: 15, fontWeight: FontWeight.w800),),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.7,
-              //Here we need to call the list of labels
               child: MyLabelList()
             ),
             MyButton(
               onPressed: (){
-                labelListCubit.addTemporalLabel();
+                //labelListCubit.addTemporalLabel();
+                BlocProvider.of<LabelListCubit>(context).addTemporalLabel();
               },
               text: "Añadir", 
             ),
             MyButton(
               onPressed: (){
-                labelListCubit.updateLabelList();
+                //labelListCubit.updateLabelList();
+                BlocProvider.of<LabelListCubit>(context).updateLabelList();
+                Navigator.pop(context);
               },
               text: "Guardar"
             ),

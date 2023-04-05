@@ -15,33 +15,49 @@ class MyLabelList extends StatefulWidget {
 class _MyLabelListState extends State<MyLabelList> {
   @override
   Widget build(BuildContext context) {
-        LabelListCubit labelListCubit = context.read<LabelListCubit>();
         return BlocBuilder<LabelListCubit,LabelListState>(
           builder: (context, state) {
             return ListView.builder(
               itemCount: state.listOfLabels.length,
               itemBuilder: (BuildContext context, int index) {
-                return Row(
-                    children: <Widget> [
-                      Expanded(
-                        child: TextFormField(
-                          initialValue: state.listOfLabels[index].info,
-                          onChanged: (value){
-                            labelListCubit.updateLabel(index, value);
-                          },
-                          decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Etiqueta',
-                              ),
-                        ), 
-                      ),
-                      MyIconButton(
-                        onPressed: (){
-                          labelListCubit.removeLabelTemporaly(index);
-                        }, 
-                        icon: const Icon(Icons.delete)
-                      ),
-                  ]
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                          children: <Widget> [
+                            Expanded(
+                              child: TextFormField(
+                                initialValue: state.listOfLabels[index].info,
+                                onChanged: (value){
+                                  //labelListCubit.updateLabel(index, value);
+                                  BlocProvider.of<LabelListCubit>(context).updateLabel(index, value);
+                                },
+                                decoration: const InputDecoration(
+                                  enabledBorder:  OutlineInputBorder(
+                                    borderSide:  BorderSide(
+                                      color: Colors.grey, 
+                                      width: 0.0
+                                    ),
+                                  ),
+                                  border: OutlineInputBorder(),  
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide:  BorderSide(
+                                      color: Color(0xFFCFCFCF), 
+                                      width: 2
+                                    ),
+                                  ),
+                                  hintText: 'Etiqueta',
+                                ),
+                              ), 
+                            ),
+                            MyIconButton(
+                              onPressed: (){
+                                //labelListCubit.removeLabelTemporaly(index);
+                                BlocProvider.of<LabelListCubit>(context).removeLabelTemporaly(index);
+                              }, 
+                              icon: const Icon(Icons.delete)
+                            ),
+                        ]
+                    )
                 );
               }
             );
