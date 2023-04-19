@@ -1,9 +1,12 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_flutter/bloc/cubit/label/label_list_cubit.dart';
+import 'package:todo_flutter/bloc/cubit/login/login_cubit.dart';
 import 'package:todo_flutter/pages/login.dart';
 import 'package:todo_flutter/pages/register_new_task.dart';
+import 'package:todo_flutter/pages/splash.dart';
 import 'package:todo_flutter/pages/todo.dart';
 import 'package:todo_flutter/pages/register_new_label.dart';
 
@@ -33,13 +36,17 @@ class MyApp extends StatelessWidget {
         BlocProvider<LabelListCubit>(
           create: (context) => LabelListCubit(),
         ),
+        BlocProvider<LoginCubit>(
+          create: (context) => LoginCubit(),
+        ),
 
       ],
       child: MaterialApp(
         initialRoute: '/',
         routes: {
-          '/': (context) => const MyLogin(),
-          '/todo':(context) =>  MyTodo(),
+          '/': (context) => AnimatedSplashScreen(splash: 'assets/checklist.png', nextScreen: const MyLogin()),
+          '/login': (context) => const MyLogin(),
+          '/todo':(context) =>  const MyTodo(),
           '/register-new-tasks':(context) =>  const MyRegistrationTask(),
           '/register-new-labels':(context) => const MyNewLabel()
         },

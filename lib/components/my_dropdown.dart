@@ -13,7 +13,6 @@ class MyDropDown extends StatefulWidget {
 }
 
 class _MyDropDownState extends State<MyDropDown> {
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LabelListCubit, LabelListState>(
@@ -24,7 +23,6 @@ class _MyDropDownState extends State<MyDropDown> {
             DropdownButton(
               //Make the size of the dropdown button the same as the textfiel
               isExpanded: true,
-              
               value: state.listOfLabels[state.selectedLabelIndex].info,
               items: state.listOfLabels.map<DropdownMenuItem<String>>((Label value) {
                 return DropdownMenuItem<String>(
@@ -33,8 +31,6 @@ class _MyDropDownState extends State<MyDropDown> {
                 );
               }).toList(),
               onChanged: (String? selectedLabel) {
-                //state.selectedLabelIndex = state.listOfLabels.indexWhere((element) => element.info == selectedLabel);
-                //context.read<LabelListCubit>().updateSelectedLabel(selectedLabel!);
                 BlocProvider.of<LabelListCubit>(context).updateSelectedLabel(selectedLabel!);
               }
             )

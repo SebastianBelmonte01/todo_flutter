@@ -14,6 +14,7 @@ class _MyTextfieldState extends State<MyTextfield> {
   Widget build(BuildContext context) {
     return TextField(
       controller: widget.myTextfieldController,
+      obscureText: widget.hintText == "Contraseña" ? true : false,
       decoration: InputDecoration(
           border: const OutlineInputBorder(),
           hintText: widget.hintText,

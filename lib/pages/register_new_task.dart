@@ -7,6 +7,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:todo_flutter/bloc/cubit/label/label_list_cubit.dart';
 import 'package:todo_flutter/classes/Task.dart';
 import 'package:todo_flutter/components/my_dropdown.dart';
+import 'package:todo_flutter/components/my_textfield.dart';
 import 'package:todo_flutter/pages/register_new_label.dart';
 
 import 'package:todo_flutter/pages/register_new_task.dart';
@@ -97,12 +98,9 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
         padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
         child: Column(
           children: [
-            TextField(
-              controller: taskNameController,
-              decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Nombre de la Tarea',
-                  ),
+            MyTextfield(
+              myTextfieldController: taskNameController, 
+              hintText: "Nombre de la Tarea",
             ),
             const SizedBox(
               height: 20,
@@ -155,7 +153,6 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
               ]
             ),
             Column(
-              
               children: [
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.1,

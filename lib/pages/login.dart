@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:todo_flutter/bloc/cubit/login/login_cubit.dart';
+import 'package:todo_flutter/components/my_list_view.dart';
+import 'package:todo_flutter/components/my_textfield.dart';
+import 'package:todo_flutter/pages/error.dart';
 import 'package:todo_flutter/pages/register_new_task.dart';
 import 'package:todo_flutter/pages/todo.dart';
 
+import '../bloc/cubit/login/login_state.dart';
 import '../components/my_button.dart';
 
 
@@ -30,62 +37,68 @@ class _MyCredentialsState extends State<MyCredentials> {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Image(image: AssetImage('assets/user-calendar.png'), ),
-        SizedBox(
-          width: 300,
-          child: TextField(
-            controller: usernameController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Usuario',
+    return  Scaffold(
+      appBar: AppBar(title: const Text("Login", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: const Color(0xFF0D47A1),),
+      body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Image(image: AssetImage('assets/user-calendar.png'), ),
+            SizedBox(
+              width: 300,
+              child: MyTextfield(
+                myTextfieldController: usernameController, 
+                hintText: "Usuario",
+              )
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: 300,
+              child: MyTextfield(
+                myTextfieldController: passwordController,
+                hintText: "Contraseña"
               ),
-          ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        SizedBox(
-          width: 300,
-          child: TextField(
-            controller: passwordController,
-            obscureText: true,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Contraseña',
-              ),
-          ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        MyButton(
-          onPressed: () {  
-            eraseCredentials(); 
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MyTodo()),
-            );
-          }, 
-          text: 'Enviar',
-        ),
-      ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            MyButton(
+              onPressed: () {  
+                BlocProvider.of<LoginCubit>(context).login(usernameController.text, passwordController.text);
+                // eraseCredentials(); 
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => MyTodo()),
+                // );
+              }, 
+              text: 'Enviar',
+            ),
+          ],
+        )
     );
   }
 }
+
+
 
 class MyLogin extends StatelessWidget {
   const MyLogin({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Login", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Color(0xFF0D47A1),),
-      body: const Center(
-        child: MyCredentials()
-      ),
-    );
+    return BlocBuilder<LoginCubit, LoginState>(
+      builder: (context, state) {
+        return Container(
+          child: state.status == LoginStatus.initial
+                ? const MyCredentials()
+                : state.status == LoginStatus.loading
+                    ? const LoadingMyToDo()
+                    : state.status == LoginStatus.success
+                        ? const MyTodo()
+                        : const MyError(),
+            );
+          }
+        );
   }
 }
 

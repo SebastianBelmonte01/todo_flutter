@@ -34,21 +34,19 @@ class MyNewLabel extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Text("Etiquetas", style: const TextStyle(fontFamily: "Roboto", fontSize: 15, fontWeight: FontWeight.w800),),
+            const Text("Etiquetas", style: TextStyle(fontFamily: "Roboto", fontSize: 15, fontWeight: FontWeight.w800),),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.7,
               child: MyLabelList()
             ),
             MyButton(
               onPressed: (){
-                //labelListCubit.addTemporalLabel();
                 BlocProvider.of<LabelListCubit>(context).addTemporalLabel();
               },
               text: "Añadir", 
             ),
             MyButton(
               onPressed: (){
-                //labelListCubit.updateLabelList();
                 BlocProvider.of<LabelListCubit>(context).updateLabelList();
                 Navigator.pop(context);
               },
@@ -56,7 +54,6 @@ class MyNewLabel extends StatelessWidget {
             ),
             MyButton(
               onPressed: (){
-                // context.read<LabelList>().setLabelList(auxList);
                 Navigator.pop(context);
               },
               text: "Cerrar"

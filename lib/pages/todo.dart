@@ -48,7 +48,7 @@ import '../components/my_list_view.dart';
 // }  
 
 class MyTodo extends StatefulWidget {
-  MyTodo({super.key});
+  const MyTodo({super.key});
   @override
   State<MyTodo> createState() => _MyTodoState();
 }
@@ -69,7 +69,25 @@ class _MyTodoState extends State<MyTodo> {
             )
           )
         },
-        backgroundColor: Color(0xFF0D47A1) ,
+        backgroundColor: const Color(0xFF0D47A1) ,
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class LoadingMyToDo extends StatelessWidget {
+  const LoadingMyToDo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("ToDo List", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Color(0xFF0D47A1),),
+      body: const LoadingMyListView(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {
+        },
+        backgroundColor: const Color(0xFF0D47A1) ,
         child: const Icon(Icons.add),
       ),
     );

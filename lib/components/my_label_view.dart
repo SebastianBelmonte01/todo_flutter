@@ -61,7 +61,6 @@ class _MyLabelListState extends State<MyLabelList> {
                 );
               }
             );
-            
           },
         );
     }
