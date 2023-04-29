@@ -159,7 +159,7 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                   ),
                   MyButton(
                     onPressed: (){
-                      Task newTask = Task(taskNameController.text, selectedLabel, selectedDate.value);
+                      Task newTask = Task(1, taskNameController.text, DateTime.now(), selectedLabel, false, selectedDate.value);
                       context.read<TodoListCubit>().addTask(newTask);
                       Navigator.pushAndRemoveUntil<void>(
                         context,

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_flutter/bloc/cubit/label/label_list_cubit.dart';
-import 'package:todo_flutter/bloc/cubit/login/login_cubit.dart';
+import 'package:todo_flutter/bloc/cubit/pages/login_page/login_cubit.dart';
+import 'package:todo_flutter/bloc/cubit/pages/task_repository/task_repository_cubit.dart';
 import 'package:todo_flutter/pages/login.dart';
 import 'package:todo_flutter/pages/register_new_task.dart';
 import 'package:todo_flutter/pages/splash.dart';
@@ -13,6 +14,7 @@ import 'package:todo_flutter/pages/register_new_label.dart';
 import 'package:todo_flutter/classes/Task.dart';
 
 import 'bloc/cubit/todo/todo_list_cubit.dart';
+import 'package:page_transition/page_transition.dart';
 
 
 
@@ -39,12 +41,15 @@ class MyApp extends StatelessWidget {
         BlocProvider<LoginCubit>(
           create: (context) => LoginCubit(),
         ),
+        BlocProvider<TaskRepository>(
+          create: (context) => TaskRepository()..todoPage(),
+        )
 
       ],
       child: MaterialApp(
         initialRoute: '/',
         routes: {
-          '/': (context) => AnimatedSplashScreen(splash: 'assets/checklist.png', nextScreen: const MyLogin()),
+          '/': (context) => AnimatedSplashScreen(splash: 'assets/checklist.png', nextScreen: const MyLogin(), backgroundColor: Color.fromARGB(255, 34, 90, 154),),
           '/login': (context) => const MyLogin(),
           '/todo':(context) =>  const MyTodo(),
           '/register-new-tasks':(context) =>  const MyRegistrationTask(),

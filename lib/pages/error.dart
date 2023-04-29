@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_flutter/components/my_button.dart';
 import 'package:todo_flutter/pages/login.dart';
 
-import '../bloc/cubit/login/login_cubit.dart';
+import '../bloc/cubit/pages/login_page/login_cubit.dart';
 
 class MyError extends StatelessWidget {
   const MyError({super.key});

@@ -17,7 +17,7 @@ class TodoListCubit extends Cubit<TodoListState> {
   }
 
   void completedTask(Task task) {
-    task.completed ? task.completed = false : task.completed = true;
+    task.completed! ? task.completed = false : task.completed = true;
     emit(TodoListState(listOfTasks: state.listOfTasks));
   }
 

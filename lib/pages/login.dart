@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:todo_flutter/bloc/cubit/login/login_cubit.dart';
+import 'package:todo_flutter/bloc/cubit/pages/login_page/login_cubit.dart';
 import 'package:todo_flutter/components/my_list_view.dart';
 import 'package:todo_flutter/components/my_textfield.dart';
 import 'package:todo_flutter/pages/error.dart';
 import 'package:todo_flutter/pages/register_new_task.dart';
 import 'package:todo_flutter/pages/todo.dart';
 
-import '../bloc/cubit/login/login_state.dart';
+import '../bloc/cubit/pages/login_page/login_state.dart';
 import '../components/my_button.dart';
 
 
@@ -90,11 +90,11 @@ class MyLogin extends StatelessWidget {
       builder: (context, state) {
         return Container(
           child: state.status == LoginStatus.initial
-                ? const MyCredentials()
+                ? const MyCredentials() //We need to create a Loading for MyCredentials
                 : state.status == LoginStatus.loading
                     ? const LoadingMyToDo()
                     : state.status == LoginStatus.success
-                        ? const MyTodo()
+                        ? const MyTodoScreen() //TODO need to change List view to the backend
                         : const MyError(),
             );
           }
