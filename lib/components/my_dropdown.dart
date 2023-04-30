@@ -27,7 +27,7 @@ class _MyDropDownState extends State<MyDropDown> {
               items: state.listOfLabels.map<DropdownMenuItem<String>>((Label value) {
                 return DropdownMenuItem<String>(
                   value: value.info,
-                  child: Text(value.info),
+                  child: Text(value.info!),
                 );
               }).toList(),
               onChanged: (String? selectedLabel) {

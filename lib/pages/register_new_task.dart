@@ -5,18 +5,22 @@ import 'package:textfield_datepicker/textfield_datepicker.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:todo_flutter/bloc/cubit/label/label_list_cubit.dart';
+import 'package:todo_flutter/bloc/cubit/pages/label_repository/label_repository_cubit.dart';
 import 'package:todo_flutter/classes/Task.dart';
 import 'package:todo_flutter/components/my_dropdown.dart';
+import 'package:todo_flutter/components/my_label_view.dart';
 import 'package:todo_flutter/components/my_textfield.dart';
 import 'package:todo_flutter/pages/register_new_label.dart';
 
 import 'package:todo_flutter/pages/register_new_task.dart';
 import 'package:todo_flutter/pages/todo.dart';
 
+import '../bloc/cubit/pages/page_status.dart';
 import '../bloc/cubit/todo/todo_list_cubit.dart';
 import '../classes/Label.dart';
 import '../components/my_button.dart';
 import '../components/my_icon_button.dart';
+import 'error.dart';
 
 
   // List<String> list = contex.read<LabelList>().getLabelFromList();
@@ -91,7 +95,7 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
 
   @override
   Widget build(BuildContext context) {
-    String selectedLabel = context.watch<LabelListCubit>().state.listOfLabels[context.watch<LabelListCubit>().state.selectedLabelIndex].info;
+    String selectedLabel = context.watch<LabelListCubit>().state.listOfLabels[context.watch<LabelListCubit>().state.selectedLabelIndex].info!;
     return Scaffold(
       appBar: AppBar(title: const Text("Añadir Tarea", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
       body: Padding(
@@ -141,9 +145,11 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                     ),
                     MyIconButton(
                       onPressed: () {
-                        Navigator.push(
+                        print("Presionaste el boton de editar etiqueta");
+                        BlocProvider.of<LabelRepositoryCubit>(context).getLabels();
+                        Navigator.push<void>(
                           context,
-                          MaterialPageRoute(builder: (context) => const MyNewLabel()),
+                          MaterialPageRoute<void>(builder: (BuildContext context) => const MyNewLabelScreen()),
                         );
                       }, 
                       icon: const Icon(Icons.edit)
@@ -159,13 +165,14 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                   ),
                   MyButton(
                     onPressed: (){
-                      Task newTask = Task(1, taskNameController.text, DateTime.now(), selectedLabel, false, selectedDate.value);
-                      context.read<TodoListCubit>().addTask(newTask);
-                      Navigator.pushAndRemoveUntil<void>(
-                        context,
-                        MaterialPageRoute<void>(builder: (BuildContext context) => MyTodo()),
-                        ModalRoute.withName('/'),
-                      );
+                      // BlocProvider.of<LabelRepositoryCubit>(context).updateLabelList();
+                      // Task newTask = Task(1, taskNameController.text, DateTime.now(), selectedLabel, false, selectedDate.value);
+                      // context.read<TodoListCubit>().addTask(newTask);
+                      // Navigator.pushAndRemoveUntil<void>(
+                      //   context,
+                      //   MaterialPageRoute<void>(builder: (BuildContext context) => MyTodo()),
+                      //   ModalRoute.withName('/'),
+                      // );
                     }, text: "Guardar"
                   ),
                   MyButton(
@@ -182,5 +189,29 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
       )
     );
   }
-
 }
+
+//Need to create new widget for different controls in the screen, here we are createing
+//a new widget that  when you preess the buutton of editing the label, it will take you to
+//the screen of editing the label
+
+
+// class MyTodoScreen extends StatelessWidget {
+//   const MyTodoScreen({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<TaskRepository, TaskRepositoryState>(
+//       builder: (context, state) {
+//         if(state.status == PageStatus.loading) {
+//           return const LoadingMyToDo();
+//         } else if (state.status == PageStatus.success) {
+//           return const MyTodo();
+//         } else {
+//           return const MyError();
+//         }
+//       },
+//     );
+//   }
+// }
+

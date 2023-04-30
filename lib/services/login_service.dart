@@ -21,7 +21,7 @@ class LoginService {
     );
     if (response.statusCode == 200) {
       print("La API respondio");
-      print("AUTH TOKEN: ${jsonDecode(response.body)['response']['authToken']}"); //TODO: quita esto xd
+      print("AUTH TOKEN: ${jsonDecode(response.body)['response']['authToken']}");
 
       var responseBody = jsonDecode(response.body);
 

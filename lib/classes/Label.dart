@@ -1,22 +1,35 @@
 import 'package:flutter/material.dart';
 
 class Label {
-  String info  = "";
-  bool isTemp = false;
+  int? id;
+  String? info;
+  bool isTemp = true;
   bool isModified = false;
   bool isRemoved = false;
   String newInfo = "";
-  int index = 0;
 
 
-  Label (String info, bool isTemp, int index){
+
+  Label (int id, String info){
+    this.id = id;
     this.info = info;
-    this.isTemp = isTemp;
+    this.isTemp = true;
     this.isModified = false;
     this.isRemoved = false;
     this.newInfo = "";
-    this.index = index;
   }
+
+  factory Label.fromJson(Map<String, dynamic> json){
+    return Label(
+      json["labelId"],
+      json['name']
+    );
+  }
+
+    Map<String, dynamic> toJson() => {
+    'labelId': id,
+    'name': info,
+  };
 
   
 

@@ -5,13 +5,8 @@ import 'package:todo_flutter/classes/Label.dart';
 part 'label_list_state.dart';
 
 class LabelListCubit extends Cubit<LabelListState> {
-  LabelListCubit() : super(LabelListState(listOfLabels: [Label("label", false, 0)], selectedLabelIndex: 0));
+  LabelListCubit() : super(LabelListState(listOfLabels: [Label(0, "label")], selectedLabelIndex: 0));
 
-  void addLabel(String label) {
-    List<Label> list = state.listOfLabels;
-    list.add(Label(label, false, list.length));
-    emit(LabelListState(listOfLabels: list, selectedLabelIndex: 0));
-  }
 
   void removeLabel(String label) {
     List<Label> list = state.listOfLabels;
@@ -21,7 +16,8 @@ class LabelListCubit extends Cubit<LabelListState> {
 
   void addTemporalLabel() {
     List<Label> list = state.listOfLabels;
-    list.add(Label("", true, list.length));
+    //list.add(Label("", true, list.length));
+    list.add(Label(list.length, ""));
     emit(LabelListState(listOfLabels: list, selectedLabelIndex: 0));
   }
 

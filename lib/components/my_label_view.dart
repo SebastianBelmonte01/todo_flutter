@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:todo_flutter/bloc/cubit/pages/label_repository/label_repository_cubit.dart';
+import 'package:todo_flutter/bloc/cubit/pages/page_status.dart';
 
 import '../bloc/cubit/label/label_list_cubit.dart';
 import '../classes/Label.dart';
@@ -15,10 +18,13 @@ class MyLabelList extends StatefulWidget {
 class _MyLabelListState extends State<MyLabelList> {
   @override
   Widget build(BuildContext context) {
-        return BlocBuilder<LabelListCubit,LabelListState>(
+        return BlocBuilder<LabelRepositoryCubit,LabelRepositoryState>(
           builder: (context, state) {
+            print("Nuevas Labels?");
+            print(state.labels.length);
+
             return ListView.builder(
-              itemCount: state.listOfLabels.length,
+              itemCount: state.labels.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -26,10 +32,10 @@ class _MyLabelListState extends State<MyLabelList> {
                           children: <Widget> [
                             Expanded(
                               child: TextFormField(
-                                initialValue: state.listOfLabels[index].info,
+                                initialValue: state.labels[index].info,
                                 onChanged: (value){
                                   //labelListCubit.updateLabel(index, value);
-                                  BlocProvider.of<LabelListCubit>(context).updateLabel(index, value);
+                                  BlocProvider.of<LabelRepositoryCubit>(context).updateLabel(index, value);
                                 },
                                 decoration: const InputDecoration(
                                   enabledBorder:  OutlineInputBorder(
@@ -52,7 +58,7 @@ class _MyLabelListState extends State<MyLabelList> {
                             MyIconButton(
                               onPressed: (){
                                 //labelListCubit.removeLabelTemporaly(index);
-                                BlocProvider.of<LabelListCubit>(context).removeLabelTemporaly(index);
+                                BlocProvider.of<LabelRepositoryCubit>(context).removeLabelTemporaly(index);
                               }, 
                               icon: const Icon(Icons.delete)
                             ),
@@ -66,5 +72,41 @@ class _MyLabelListState extends State<MyLabelList> {
     }
     
   }
+
+  class MyLoadingLabelList extends StatelessWidget {
+  const MyLoadingLabelList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!, 
+      child: ListView.builder(
+              itemCount: 10,
+              itemBuilder: (_, __) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                          children: <Widget> [
+                            Expanded(
+                              child: Container(
+                                height: 50,
+                                color: Colors.white
+                              ,
+                              ) 
+                            ),
+                            MyIconButton(
+                              onPressed: (){
+                              }, 
+                              icon: const Icon(Icons.delete)
+                            ),
+                        ]
+                    )
+                );
+              }
+            )
+    );
+  }
+}
   
 
