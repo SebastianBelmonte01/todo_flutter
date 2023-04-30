@@ -29,8 +29,9 @@ class MyError extends StatelessWidget {
           const Text("Ha ocurrido un error", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30),),
           MyButton(
             onPressed: () {
-              //Now We Do not have to use the Navigator's method, we have to use states
               BlocProvider.of<LoginCubit>(context).chageStateToInitial();
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const MyLogin()));
+
             }, 
             text: "Volver al login"
           )

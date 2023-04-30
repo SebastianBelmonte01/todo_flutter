@@ -66,11 +66,6 @@ class _MyCredentialsState extends State<MyCredentials> {
             MyButton(
               onPressed: () {  
                 BlocProvider.of<LoginCubit>(context).login(usernameController.text, passwordController.text);
-                // eraseCredentials(); 
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => MyTodo()),
-                // );
               }, 
               text: 'Enviar',
             ),

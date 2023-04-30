@@ -8,6 +8,7 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(const LoginState());
 
   Future<void> login(String username, String password) async {
+    print("Nuevo login");
     emit(state.copyWith(status: LoginStatus.loading));
     try {
       await LoginService.login(username, password);
