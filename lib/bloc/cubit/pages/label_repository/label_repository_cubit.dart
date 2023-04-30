@@ -73,6 +73,19 @@ class LabelRepositoryCubit extends Cubit<LabelRepositoryState> {
       emit(state.copyWith(status: PageStatus.failure));
     }
   }
+  void updateSelectedLabel(String label){
+    List<Label> newList = [...state.labels];
+    int index = newList.indexWhere((element) => element.info == label);
+    print("El indice seleccionado ahora es el $index");
+    emit(state.copyWith(selectedLabelIndex: index));
+  }
+  
+
+  // void updateSelectedLabel(String selectedLabel){
+  //   int index = state.listOfLabels.indexWhere((element) => element.info == selectedLabel);
+  //   print("El indice seleccionado ahora es el $index");
+  //   emit(LabelListState(listOfLabels: state.listOfLabels, selectedLabelIndex: index));
+  // }
 
 
   /*

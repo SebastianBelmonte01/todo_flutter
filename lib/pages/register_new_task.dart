@@ -1,11 +1,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:textfield_datepicker/textfield_datepicker.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:todo_flutter/bloc/cubit/label/label_list_cubit.dart';
 import 'package:todo_flutter/bloc/cubit/pages/label_repository/label_repository_cubit.dart';
+import 'package:todo_flutter/bloc/cubit/pages/task_repository/task_repository_cubit.dart';
 import 'package:todo_flutter/classes/Task.dart';
 import 'package:todo_flutter/components/my_dropdown.dart';
 import 'package:todo_flutter/components/my_label_view.dart';
@@ -95,7 +97,8 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
 
   @override
   Widget build(BuildContext context) {
-    String selectedLabel = context.watch<LabelListCubit>().state.listOfLabels[context.watch<LabelListCubit>().state.selectedLabelIndex].info!;
+    String selectedLabel = context.watch<LabelRepositoryCubit>().state.labels[context.watch<LabelRepositoryCubit>().state.selectedLabelIndex].info!;
+    
     return Scaffold(
       appBar: AppBar(title: const Text("Añadir Tarea", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30)), backgroundColor: Colors.blue[900],),
       body: Padding(
@@ -145,8 +148,7 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                     ),
                     MyIconButton(
                       onPressed: () {
-                        print("Presionaste el boton de editar etiqueta");
-                        BlocProvider.of<LabelRepositoryCubit>(context).getLabels();
+                      BlocProvider.of<LabelRepositoryCubit>(context).getLabels();
                         Navigator.push<void>(
                           context,
                           MaterialPageRoute<void>(builder: (BuildContext context) => const MyNewLabelScreen()),
@@ -165,14 +167,15 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
                   ),
                   MyButton(
                     onPressed: (){
-                      // BlocProvider.of<LabelRepositoryCubit>(context).updateLabelList();
-                      // Task newTask = Task(1, taskNameController.text, DateTime.now(), selectedLabel, false, selectedDate.value);
-                      // context.read<TodoListCubit>().addTask(newTask);
-                      // Navigator.pushAndRemoveUntil<void>(
-                      //   context,
-                      //   MaterialPageRoute<void>(builder: (BuildContext context) => MyTodo()),
-                      //   ModalRoute.withName('/'),
-                      // );
+                      print("INfo");
+                      print(taskNameController.text);
+                      print("Fecha");
+                      print(selectedDate.value);
+                      print("Selected Label");
+                      print(selectedLabel);
+                      Task newTask = Task(null, taskNameController.text, selectedDate.value, selectedLabel, null, null);
+                      BlocProvider.of<TaskRepository>(context).createNewTask(newTask);
+                      Navigator.pop(context);
                     }, text: "Guardar"
                   ),
                   MyButton(
@@ -191,27 +194,26 @@ class _MyRegistrationTaskState extends State<MyRegistrationTask> with Restoratio
   }
 }
 
-//Need to create new widget for different controls in the screen, here we are createing
-//a new widget that  when you preess the buutton of editing the label, it will take you to
-//the screen of editing the label
 
 
-// class MyTodoScreen extends StatelessWidget {
-//   const MyTodoScreen({super.key});
+class MyTaskScreen extends StatelessWidget {
+  const MyTaskScreen({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocBuilder<TaskRepository, TaskRepositoryState>(
-//       builder: (context, state) {
-//         if(state.status == PageStatus.loading) {
-//           return const LoadingMyToDo();
-//         } else if (state.status == PageStatus.success) {
-//           return const MyTodo();
-//         } else {
-//           return const MyError();
-//         }
-//       },
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<LabelRepositoryCubit, LabelRepositoryState>(
+      builder: (context, state) {
+        if(state.status == PageStatus.loading) {
+          print("loading");
+          return const MyLoadingLabelList();
+        } else if (state.status == PageStatus.success) {
+          print("success");
+          return const MyRegistrationTask();
+        } else {
+          return const MyError();
+        }
+      },
+    );
+  }
+}
 

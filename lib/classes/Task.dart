@@ -9,7 +9,7 @@ class Task {
   DateTime? initialDate;
   DateTime? dueDate;
 
-  Task(int id, String title, DateTime initialDate, String label, bool completed, DateTime dueDate){
+  Task(int? id, String title, DateTime initialDate, String label, bool? completed, DateTime? dueDate){
     this.id = id;
     this.title = title;
     this.label = label;
@@ -31,4 +31,10 @@ class Task {
     DateTime.parse(json['completedDate'])
     ); 
   }
+
+  Map<String, dynamic> toJson() => {
+    "description": title,
+    "label": label,
+    "date": initialDate?.toIso8601String(),
+  };
 }

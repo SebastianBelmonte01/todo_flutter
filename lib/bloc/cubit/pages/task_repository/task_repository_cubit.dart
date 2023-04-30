@@ -32,4 +32,17 @@ class TaskRepository extends Cubit<TaskRepositoryState> {
       emit(state.copyWith(status: PageStatus.failure));
     }
   }
+
+  Future<void> createNewTask(Task newTask) async {
+    emit(state.copyWith(status: PageStatus.loading));
+    try {
+      print("TaskRepository: createNewTask");
+      await TodoService.createTask(newTask);
+      List<Task> tasksUpdate = await TodoService.getTasks();
+      emit(state.copyWith(status: PageStatus.success, tasks: tasksUpdate));
+    } catch (e) {
+      print(e);
+      emit(state.copyWith(status: PageStatus.failure));
+    }
+  }
 }

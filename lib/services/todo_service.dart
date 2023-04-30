@@ -50,6 +50,27 @@ class TodoService {
     }
   }
 
+  static Future<void> createTask(Task newTask) async {
+    const storage = FlutterSecureStorage();
+    final authToken = await storage.read(key: 'authToken');
+
+    final response = await http.post(
+      Uri.parse("${Api.url}/task"),
+      headers: <String, String> {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $authToken'
+      },
+      body: jsonEncode(newTask.toJson())
+    );
+    if (response.statusCode == 200) {
+      print("La API respondio");
+      print(response.body);
+    } else {
+      print("La API NO respondio");
+      throw Exception('Failed to login');
+    }
+  }
+
 
 
 }
