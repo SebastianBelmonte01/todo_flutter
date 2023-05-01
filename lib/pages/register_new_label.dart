@@ -134,7 +134,11 @@ class MyNewLabelScreen extends StatelessWidget {
           return const MyNewLabelLoading();
         } else if (state.status == PageStatus.success) {
           return const MyNewLabel();
-        } else {
+        } else if (state.status == PageStatus.failure) {
+          return const MyError();
+        }
+        else {
+          print("Error en Register new Label" );
           return const MyError();
         }
       },

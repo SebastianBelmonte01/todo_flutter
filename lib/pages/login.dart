@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:todo_flutter/bloc/cubit/pages/login_page/login_cubit.dart';
+import 'package:todo_flutter/bloc/cubit/pages/page_status.dart';
 import 'package:todo_flutter/components/my_list_view.dart';
 import 'package:todo_flutter/components/my_textfield.dart';
 import 'package:todo_flutter/pages/error.dart';
@@ -84,11 +85,11 @@ class MyLogin extends StatelessWidget {
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
         return Container(
-          child: state.status == LoginStatus.initial
+          child: state.status == PageStatus.initial
                 ? const MyCredentials() //We need to create a Loading for MyCredentials
-                : state.status == LoginStatus.loading
+                : state.status == PageStatus.loading
                     ? const LoadingMyToDo()
-                    : state.status == LoginStatus.success
+                    : state.status == PageStatus.success
                         ? const MyTodoScreen() //TODO need to change List view to the backend
                         : const MyError(),
             );

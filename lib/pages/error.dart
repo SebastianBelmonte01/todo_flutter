@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_flutter/bloc/cubit/pages/page_status.dart';
 import 'package:todo_flutter/components/my_button.dart';
 import 'package:todo_flutter/pages/login.dart';
+import 'package:todo_flutter/pages/todo.dart';
 
 import '../bloc/cubit/pages/login_page/login_cubit.dart';
 
@@ -29,11 +31,15 @@ class MyError extends StatelessWidget {
           const Text("Ha ocurrido un error", style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.w900, fontSize: 30),),
           MyButton(
             onPressed: () {
-              BlocProvider.of<LoginCubit>(context).chageStateToInitial();
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const MyLogin()));
+              Navigator.pop(context);
 
+              // BlocProvider.of<LoginCubit>(context).chageStateToInitial();
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const MyLogin()),
+              // );
             }, 
-            text: "Volver al login"
+            text: "Pestaña Anterior"
           )
   
         ]

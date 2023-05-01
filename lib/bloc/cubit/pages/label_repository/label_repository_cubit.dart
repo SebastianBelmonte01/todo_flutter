@@ -79,33 +79,4 @@ class LabelRepositoryCubit extends Cubit<LabelRepositoryState> {
     print("El indice seleccionado ahora es el $index");
     emit(state.copyWith(selectedLabelIndex: index));
   }
-  
-
-  // void updateSelectedLabel(String selectedLabel){
-  //   int index = state.listOfLabels.indexWhere((element) => element.info == selectedLabel);
-  //   print("El indice seleccionado ahora es el $index");
-  //   emit(LabelListState(listOfLabels: state.listOfLabels, selectedLabelIndex: index));
-  // }
-
-
-  /*
-
-    void updateLabelList(){
-    List<Label> list = state.listOfLabels;
-    List<Label> aux = [];
-    for (Label label in list) {
-      print("LABEL: ${label.info} in");
-      if (label.info != "" && !label.isRemoved) {
-        if(label.isModified){
-          label.isModified = false;
-          label.info = label.newInfo;
-        }
-        aux.add(label);
-      } 
-    }
-    emit(LabelListState(listOfLabels: aux, selectedLabelIndex: 0));
-  }
-
-
-  */
 }

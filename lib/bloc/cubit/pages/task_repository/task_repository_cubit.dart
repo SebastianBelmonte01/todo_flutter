@@ -45,4 +45,9 @@ class TaskRepository extends Cubit<TaskRepositoryState> {
       emit(state.copyWith(status: PageStatus.failure));
     }
   }
+
+  void tryAgain(){
+    emit(state.copyWith(status: PageStatus.initial));
+  }
+
 }

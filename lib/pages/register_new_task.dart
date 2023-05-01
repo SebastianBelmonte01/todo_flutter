@@ -209,9 +209,14 @@ class MyTaskScreen extends StatelessWidget {
         } else if (state.status == PageStatus.success) {
           print("success");
           return const MyRegistrationTask();
-        } else {
+        } else if(state.status == PageStatus.failure){
           return const MyError();
         }
+        else {
+          print("Error en Register new task" );
+          return const MyError();
+        }
+
       },
     );
   }

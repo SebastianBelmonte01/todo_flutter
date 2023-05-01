@@ -1,18 +1,18 @@
 import 'package:equatable/equatable.dart';
+import 'package:todo_flutter/bloc/cubit/pages/page_status.dart';
 
-enum LoginStatus { initial, loading, success, failure }
 
 class LoginState extends Equatable {
 
-  final LoginStatus? status;
+  final PageStatus? status;
 
   const LoginState({
-    this.status = LoginStatus.initial,
+    this.status = PageStatus.initial,
   });
 
   LoginState copyWith({
 
-    LoginStatus? status,
+    PageStatus? status,
   }) {
     return LoginState(
       status: status ?? this.status,

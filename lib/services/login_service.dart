@@ -31,7 +31,8 @@ class LoginService {
 
       return ApiResponse.fromJson(responseBody);
     } else {
-      print("La API respondio");
+      print("La API NO respondio");
+      print(response.body);
       throw Exception('Failed to login');
     }
   }
